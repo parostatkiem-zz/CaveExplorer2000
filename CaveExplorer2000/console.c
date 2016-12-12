@@ -8,7 +8,7 @@
 void initScreen( void )
 {
    // Wymaga: windows.h
-   // wy³¹czenie mrugania kursora - dzia³a od windowsa XP
+   // wylaczenie mrugania kursora - dziala od windowsa XP
    CONSOLE_CURSOR_INFO cciInfo;
    cciInfo.dwSize = 1;
    cciInfo.bVisible = 0;   
