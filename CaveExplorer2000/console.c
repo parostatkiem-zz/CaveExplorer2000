@@ -4,11 +4,11 @@
 #include <stdio.h>
 #include <conio.h>
 
-
+//test
 void initScreen( void )
 {
    // Wymaga: windows.h
-   // wy³¹czenie mrugania kursora - dzia³a od windowsa XP
+   // wyÂ³Â¹czenie mrugania kursora - dziaÂ³a od windowsa XP
    CONSOLE_CURSOR_INFO cciInfo;
    cciInfo.dwSize = 1;
    cciInfo.bVisible = 0;   
