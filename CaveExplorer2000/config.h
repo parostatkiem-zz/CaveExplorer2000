@@ -30,7 +30,7 @@
 #define EnemyStartDamage 5
 #define MaxEnemyNum 100		//maksymalna przewidziana ilosc przeciwnikow (ustawiona na sztywno bo tak.)
 
-#define SeeDistance 5 //zasięg wzroku przeciwników
+#define SeeDistance 6 //zasięg wzroku przeciwników
 
 //kolory
 #define kolor_gracz 0x03

@@ -267,20 +267,72 @@ void MoveEnemies()
 					{
 						if (map[enemies[i].position.Y][enemies[i].position.X - 1] == blok_pusty || map[enemies[i].position.Y ][enemies[i].position.X - 1] == blok_gracz)
 						{
+							//mo¿e siê normalnie poruszyæ w wyznaczonym kierunku
 							enemies[i].position.X--;
 							putCharXY(GetOnScreenPos(enemies[i].position).X, GetOnScreenPos(enemies[i].position).Y, blok_przeciwnik);
 							putCharXY(GetOnScreenPos(enemies[i].position).X+1, GetOnScreenPos(enemies[i].position).Y, blok_pusty);
 							map[enemies[i].position.Y][enemies[i].position.X + 1] = blok_pusty;
+						}
+						else
+						{
+							if (yDist > 0) //w gore
+							{
+								if (map[enemies[i].position.Y - 1][enemies[i].position.X] == blok_pusty || map[enemies[i].position.Y - 1][enemies[i].position.X] == blok_gracz)
+								{
+									//nie móg³ siê normalnie poruszyæ, wiêc rusza wed³ug innej osi
+									enemies[i].position.Y--;
+									putCharXY(GetOnScreenPos(enemies[i].position).X, GetOnScreenPos(enemies[i].position).Y, blok_przeciwnik);
+									putCharXY(GetOnScreenPos(enemies[i].position).X, GetOnScreenPos(enemies[i].position).Y + 1, blok_pusty);
+									map[enemies[i].position.Y + 1][enemies[i].position.X] = blok_pusty;
+								}
+							}
+							else //w dol
+							{
+								if (map[enemies[i].position.Y + 1][enemies[i].position.X] == blok_pusty || map[enemies[i].position.Y + 1][enemies[i].position.X] == blok_pusty)
+								{
+									//nie móg³ siê normalnie poruszyæ, wiêc rusza wed³ug innej osi
+									enemies[i].position.Y++;
+									putCharXY(GetOnScreenPos(enemies[i].position).X, GetOnScreenPos(enemies[i].position).Y, blok_przeciwnik);
+									putCharXY(GetOnScreenPos(enemies[i].position).X, GetOnScreenPos(enemies[i].position).Y - 1, blok_pusty);
+									map[enemies[i].position.Y - 1][enemies[i].position.X] = blok_pusty;
+								}
+							}
 						}
 					}
 					else //w prawo
 					{
 						if (map[enemies[i].position.Y ][enemies[i].position.X + 1] == blok_pusty ||map[enemies[i].position.Y ][enemies[i].position.X + 1] == blok_gracz)
 						{
+							//mo¿e siê normalnie poruszyæ w wyznaczonym kierunku
 							enemies[i].position.X++;
 							putCharXY(GetOnScreenPos(enemies[i].position).X, GetOnScreenPos(enemies[i].position).Y, blok_przeciwnik);
 							putCharXY(GetOnScreenPos(enemies[i].position).X - 1, GetOnScreenPos(enemies[i].position).Y, blok_pusty);
 							map[enemies[i].position.Y][enemies[i].position.X - 1] = blok_pusty;
+						}
+						else
+						{
+							if (yDist > 0) //w gore
+							{
+								if (map[enemies[i].position.Y - 1][enemies[i].position.X] == blok_pusty || map[enemies[i].position.Y - 1][enemies[i].position.X] == blok_gracz)
+								{
+									//nie móg³ siê normalnie poruszyæ, wiêc rusza wed³ug innej osi
+									enemies[i].position.Y--;
+									putCharXY(GetOnScreenPos(enemies[i].position).X, GetOnScreenPos(enemies[i].position).Y, blok_przeciwnik);
+									putCharXY(GetOnScreenPos(enemies[i].position).X, GetOnScreenPos(enemies[i].position).Y + 1, blok_pusty);
+									map[enemies[i].position.Y + 1][enemies[i].position.X] = blok_pusty;
+								}
+							}
+							else //w dol
+							{
+								if (map[enemies[i].position.Y + 1][enemies[i].position.X] == blok_pusty || map[enemies[i].position.Y + 1][enemies[i].position.X] == blok_pusty)
+								{
+									//nie móg³ siê normalnie poruszyæ, wiêc rusza wed³ug innej osi
+									enemies[i].position.Y++;
+									putCharXY(GetOnScreenPos(enemies[i].position).X, GetOnScreenPos(enemies[i].position).Y, blok_przeciwnik);
+									putCharXY(GetOnScreenPos(enemies[i].position).X, GetOnScreenPos(enemies[i].position).Y - 1, blok_pusty);
+									map[enemies[i].position.Y - 1][enemies[i].position.X] = blok_pusty;
+								}
+							}
 						}
 					}
 				}
@@ -290,20 +342,76 @@ void MoveEnemies()
 					{
 						if (map[enemies[i].position.Y - 1][enemies[i].position.X ] == blok_pusty || map[enemies[i].position.Y-1][enemies[i].position.X ] == blok_gracz)
 						{
+							//mo¿e siê normalnie poruszyæ w wyznaczonym kierunku
 							enemies[i].position.Y--;
 							putCharXY(GetOnScreenPos(enemies[i].position).X, GetOnScreenPos(enemies[i].position).Y, blok_przeciwnik);
 							putCharXY(GetOnScreenPos(enemies[i].position).X , GetOnScreenPos(enemies[i].position).Y + 1, blok_pusty);
 							map[enemies[i].position.Y + 1][enemies[i].position.X] = blok_pusty;
+						}
+						else
+						{
+							if (xDist > 0) //w lewo
+							{
+								if (map[enemies[i].position.Y][enemies[i].position.X - 1] == blok_pusty || map[enemies[i].position.Y][enemies[i].position.X - 1] == blok_gracz)
+								{
+									//nie móg³ siê normalnie poruszyæ, wiêc rusza wed³ug innej osi
+									enemies[i].position.X--;
+									putCharXY(GetOnScreenPos(enemies[i].position).X, GetOnScreenPos(enemies[i].position).Y, blok_przeciwnik);
+									putCharXY(GetOnScreenPos(enemies[i].position).X + 1, GetOnScreenPos(enemies[i].position).Y, blok_pusty);
+									map[enemies[i].position.Y][enemies[i].position.X + 1] = blok_pusty;
+								}
+								
+							}
+							else //w prawo
+							{
+								if (map[enemies[i].position.Y][enemies[i].position.X + 1] == blok_pusty || map[enemies[i].position.Y][enemies[i].position.X + 1] == blok_gracz)
+								{
+									//nie móg³ siê normalnie poruszyæ, wiêc rusza wed³ug innej osi
+									enemies[i].position.X++;
+									putCharXY(GetOnScreenPos(enemies[i].position).X, GetOnScreenPos(enemies[i].position).Y, blok_przeciwnik);
+									putCharXY(GetOnScreenPos(enemies[i].position).X - 1, GetOnScreenPos(enemies[i].position).Y, blok_pusty);
+									map[enemies[i].position.Y][enemies[i].position.X - 1] = blok_pusty;
+								}
+								
+							}
 						}
 					}
 					else //w dol
 					{
 						if (map[enemies[i].position.Y+1][enemies[i].position.X] == blok_pusty|| map[enemies[i].position.Y+1][enemies[i].position.X] == blok_pusty)
 						{
+							//mo¿e siê normalnie poruszyæ w wyznaczonym kierunku
 							enemies[i].position.Y++;
 							putCharXY(GetOnScreenPos(enemies[i].position).X, GetOnScreenPos(enemies[i].position).Y, blok_przeciwnik);
 							putCharXY(GetOnScreenPos(enemies[i].position).X, GetOnScreenPos(enemies[i].position).Y - 1, blok_pusty);
 							map[enemies[i].position.Y - 1][enemies[i].position.X] = blok_pusty;
+						}
+						else
+						{
+							if (xDist > 0) //w lewo
+							{
+								if (map[enemies[i].position.Y][enemies[i].position.X - 1] == blok_pusty || map[enemies[i].position.Y][enemies[i].position.X - 1] == blok_gracz)
+								{
+									//nie móg³ siê normalnie poruszyæ, wiêc rusza wed³ug innej osi
+									enemies[i].position.X--;
+									putCharXY(GetOnScreenPos(enemies[i].position).X, GetOnScreenPos(enemies[i].position).Y, blok_przeciwnik);
+									putCharXY(GetOnScreenPos(enemies[i].position).X + 1, GetOnScreenPos(enemies[i].position).Y, blok_pusty);
+									map[enemies[i].position.Y][enemies[i].position.X + 1] = blok_pusty;
+								}
+
+							}
+							else //w prawo
+							{
+								if (map[enemies[i].position.Y][enemies[i].position.X + 1] == blok_pusty || map[enemies[i].position.Y][enemies[i].position.X + 1] == blok_gracz)
+								{
+									//nie móg³ siê normalnie poruszyæ, wiêc rusza wed³ug innej osi
+									enemies[i].position.X++;
+									putCharXY(GetOnScreenPos(enemies[i].position).X, GetOnScreenPos(enemies[i].position).Y, blok_przeciwnik);
+									putCharXY(GetOnScreenPos(enemies[i].position).X - 1, GetOnScreenPos(enemies[i].position).Y, blok_pusty);
+									map[enemies[i].position.Y][enemies[i].position.X - 1] = blok_pusty;
+								}
+
+							}
 						}
 					}
 				}
