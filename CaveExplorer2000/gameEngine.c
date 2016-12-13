@@ -6,6 +6,7 @@
 
 int CaveSegments = 0;
 
+
 void InitializeLevel(int level)
 {
 	srand(time(NULL));
@@ -36,6 +37,37 @@ void InitializeLevel(int level)
 		AddCaveSegment(tmp);
 	
 	}
+
+	//generowanie przeciwników===================
+	struct Enemy e;
+	e.position.X = 0;
+	e.position.Y = 0;
+	for (i = 0; i < MaxEnemyNum; i++) //czyszczenie tablicy przeciwnikow
+	{
+		enemies[i] = e; //resetowanie pozycji kazdego przeciwnika na (0,0) - oznacza to, ¿e nie on istnieje
+	}
+
+
+	e.damage = EnemyStartDamage + (EnemyMultiplier*level);
+	e.hp = EnemyStartHp + (EnemyMultiplier*level);
+	for (i = 0; i <= EnemyAmount+(EnemyMultiplier*level); i++)
+	{
+		
+		COORD tmp;
+		tmp.X = RandomInt(1, MapMaxX - 1);
+		tmp.Y = RandomInt(1, MapMaxX - 1);
+		if (map[tmp.X][tmp.Y] == blok_pusty)
+		{
+			e.position = tmp;
+			//wylosowana pozycja jest pusta. Stawianie przeciwnika
+			enemies[0] = e;
+			map[tmp.X][tmp.Y] = blok_przeciwnik;
+		}
+		else
+			i--;
+
+	}
+
 
 	//ustawianie gracza
 	PlacePlayer();
@@ -161,7 +193,7 @@ void Move()
 void TryMove(char direction)
 {
 	COORD tmp = player;
-	setColor(0x0B);
+	setColor(kolor_gracz);
 	switch (direction)
 	{ 
 	case 72: //gora
@@ -203,4 +235,12 @@ void TryMove(char direction)
 	setColor(0x0F);
 	//dfvbdfRefreshMap();
 //	putCharXY(30, 30, direction);
+}
+
+COORD GetOnScreenPos(COORD p)
+{
+	COORD out;
+	out.X = p.X - viewport.X;
+	out.Y = p.Y - viewport.Y;
+	return out;
 }

@@ -10,7 +10,7 @@ COORD player;
 COORD viewport;
 
 
-
+struct Enemy enemies[MaxEnemyNum];
 
 int main()
 {

@@ -13,9 +13,11 @@
 
 static char *_map = map;
 int RandomInt(int min, int max);
+COORD GetOnScreenPos(COORD p);
 void PlacePlayer();
 void AddCaveSegment(COORD punkt);
 void InitializeLevel(int level);
 void Move();
 void TryMove(char direction);
+
 
