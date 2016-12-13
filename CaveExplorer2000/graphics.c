@@ -6,6 +6,8 @@
 #include <conio.h>
 
 
+
+
 void RefreshMap()
 {
 	int x = 0;
@@ -15,15 +17,20 @@ void RefreshMap()
 	viewport.X = player.X - ViewportW / 2;
 	viewport.Y = player.Y - ViewportH / 2;
 
-
+	
 	//system("CLS");
 
 	char c;
-
+	COORD tmp;
 	for (y = viewport.Y; y < viewport.Y+ViewportH; y++)
 	{
 		for (x = viewport.X; x < viewport.X+ViewportW; x++)
 		{
+			tmp.X =x - ViewportH / 2;
+			tmp.Y = y ;
+			
+
+
 			c = map[y][x];
 			if (x < 0 || x >= MapMaxX || y < 0 || y >= MapMaxY)
 			{
@@ -53,7 +60,9 @@ void RefreshMap()
 					setColor(kolor_blok_staly);
 					break;
 			}
+			//if (CalculateDistance(player,tmp)<=Visibility)
 			printf("%c",c );
+
 			setColor(0x0F);
 			
 		}

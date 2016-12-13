@@ -226,6 +226,7 @@ void TryMove(char direction)
 	map[player.Y][player.X] = blok_pusty;
 
 	setColor(0x0F);
+
 	//dfvbdfRefreshMap();
 //	putCharXY(30, 30, direction);
 	return 1;

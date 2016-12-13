@@ -31,6 +31,7 @@
 #define MaxEnemyNum 100		//maksymalna przewidziana ilosc przeciwnikow (ustawiona na sztywno bo tak.)
 
 #define SeeDistance 6 //zasięg wzroku przeciwników
+#define Visibility 10 //zasięg wzroku gracza
 
 //kolory
 #define kolor_gracz 0x03
