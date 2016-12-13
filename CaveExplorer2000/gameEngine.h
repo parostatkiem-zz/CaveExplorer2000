@@ -14,7 +14,9 @@
 static char *_map = map;
 int RandomInt(int min, int max);
 COORD GetOnScreenPos(COORD p);
+int CalculateDistance(COORD a, COORD b);
 void PlacePlayer();
+void MoveEnemies();
 void AddCaveSegment(COORD punkt);
 void InitializeLevel(int level);
 void Move();

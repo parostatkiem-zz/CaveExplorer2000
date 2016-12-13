@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <conio.h>
 #include <string.h>
+#include <math.h>
 
 int CaveSegments = 0;
 
@@ -50,17 +51,21 @@ void InitializeLevel(int level)
 
 	e.damage = EnemyStartDamage + (EnemyMultiplier*level);
 	e.hp = EnemyStartHp + (EnemyMultiplier*level);
-	for (i = 0; i <= EnemyAmount+(EnemyMultiplier*level); i++)
+	for (i = 0; i < EnemyAmount+(EnemyMultiplier*level)-2; i++)
 	{
-		
+		int a = EnemyAmount + (EnemyMultiplier*level);
 		COORD tmp;
 		tmp.X = RandomInt(1, MapMaxX - 1);
 		tmp.Y = RandomInt(1, MapMaxX - 1);
+
 		if (map[tmp.X][tmp.Y] == blok_pusty)
 		{
+			COORD tmp2;
+			tmp2.X = tmp.Y;
+			tmp2.Y = tmp.X;
 			e.position = tmp;
 			//wylosowana pozycja jest pusta. Stawianie przeciwnika
-			enemies[0] = e;
+			enemies[i] = e;
 			map[tmp.X][tmp.Y] = blok_przeciwnik;
 		}
 		else
@@ -164,24 +169,12 @@ void Move()
 	{
 		znak = getKey();
 				if (znak == 0 || znak == 0xE0) znak = getKey();
-			switch (znak) 
-			{ // the real value
-			case 72:
-				TryMove(72);
+			if(znak==72|| znak == 80 || znak == 77 || znak == 75)
+			{
+				TryMove(znak);
+				MoveEnemies();
 				CheckRefresh();
-				break;
-			case 80:
-				TryMove(80);
-				CheckRefresh();
-				break;
-			case 77:
-				TryMove(77);
-				CheckRefresh();
-				break;
-			case 75:
-				TryMove(75);
-				CheckRefresh();
-				break;
+		
 			}
 	
 
@@ -235,6 +228,7 @@ void TryMove(char direction)
 	setColor(0x0F);
 	//dfvbdfRefreshMap();
 //	putCharXY(30, 30, direction);
+	return 1;
 }
 
 COORD GetOnScreenPos(COORD p)
@@ -243,4 +237,86 @@ COORD GetOnScreenPos(COORD p)
 	out.X = p.X - viewport.X;
 	out.Y = p.Y - viewport.Y;
 	return out;
+}
+
+void MoveEnemies()
+{
+	int i;
+	int xDist = 0;
+	int yDist = 0;
+	for (i = 0; i < MaxEnemyNum; i++) //pêtla po wszystkich przeciwnikach
+	{
+		if (enemies[i].position.X == 0 && enemies[i].position.Y == 0)
+			break; //koniec pêtli jeœli przeciwnik nie istnieje
+		
+		int tmp = CalculateDistance(enemies[i].position, player);
+		if (CalculateDistance(enemies[i].position, player) <= SeeDistance) //jeœli przeciwnik widzi gracza
+		{
+			setColor(kolor_blok_przeciwnik);
+			if (CalculateDistance(enemies[i].position, player) <= 1) //przeciwnik stoi ko³o gracza
+			{
+
+			}
+			else //przeciwnik idzie w kierunku gracza
+			{
+				xDist = enemies[i].position.X - player.X;
+				yDist = enemies[i].position.Y - player.Y;
+				if (abs(xDist) > abs(yDist)) //przeciwnik porusza siê w osi poziomej
+				{
+					if (xDist > 0) //w lewo
+					{
+						if (map[enemies[i].position.X -1][enemies[i].position.Y ] == blok_pusty || map[enemies[i].position.X - 1][enemies[i].position.Y] == blok_gracz)
+						{
+							enemies[i].position.X--;
+							putCharXY(GetOnScreenPos(enemies[i].position).X, GetOnScreenPos(enemies[i].position).Y, blok_przeciwnik);
+							putCharXY(GetOnScreenPos(enemies[i].position).X+1, GetOnScreenPos(enemies[i].position).Y, blok_pusty);
+							map[enemies[i].position.X+1][enemies[i].position.Y] = blok_pusty;
+						}
+					}
+					else //w prawo
+					{
+						if (map[enemies[i].position.X + 1][enemies[i].position.Y] == blok_pusty ||map[enemies[i].position.X + 1][enemies[i].position.Y] == blok_gracz)
+						{
+							enemies[i].position.X++;
+							putCharXY(GetOnScreenPos(enemies[i].position).X, GetOnScreenPos(enemies[i].position).Y, blok_przeciwnik);
+							putCharXY(GetOnScreenPos(enemies[i].position).X - 1, GetOnScreenPos(enemies[i].position).Y, blok_pusty);
+							map[enemies[i].position.X-1][enemies[i].position.Y] = blok_pusty;
+						}
+					}
+				}
+				else //przeciwnik porusza siê w osi pionowej
+				{
+					if (yDist > 0) //w gore
+					{
+						if (map[enemies[i].position.X ][enemies[i].position.Y - 1] == blok_pusty || map[enemies[i].position.X][enemies[i].position.Y - 1] == blok_gracz)
+						{
+							enemies[i].position.Y--;
+							putCharXY(GetOnScreenPos(enemies[i].position).X, GetOnScreenPos(enemies[i].position).Y, blok_przeciwnik);
+							putCharXY(GetOnScreenPos(enemies[i].position).X , GetOnScreenPos(enemies[i].position).Y + 1, blok_pusty);
+							map[enemies[i].position.X][enemies[i].position.Y+1] = blok_pusty;
+						}
+					}
+					else //w dol
+					{
+						if (map[enemies[i].position.X][enemies[i].position.Y + 1] == blok_pusty|| map[enemies[i].position.X][enemies[i].position.Y + 1] == blok_pusty)
+						{
+							enemies[i].position.Y++;
+							putCharXY(GetOnScreenPos(enemies[i].position).X, GetOnScreenPos(enemies[i].position).Y, blok_przeciwnik);
+							putCharXY(GetOnScreenPos(enemies[i].position).X, GetOnScreenPos(enemies[i].position).Y - 1, blok_pusty);
+							map[enemies[i].position.X][enemies[i].position.Y-1] = blok_pusty;
+						}
+					}
+				}
+			}
+			//koniec ruchu
+			map[enemies[i].position.X][enemies[i].position.Y] = blok_przeciwnik;
+
+			setColor(0x0F);
+		}
+	}
+}
+
+int CalculateDistance(COORD a, COORD b)
+{
+	return sqrt(pow((a.X-b.X),2)+ pow((a.Y - b.Y), 2));
 }

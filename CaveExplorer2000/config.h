@@ -1,8 +1,8 @@
 ﻿#pragma once
 #include <windows.h>
 // Wymiary planszy
-#define  MapMaxX   200
-#define  MapMaxY	200
+#define  MapMaxX   50
+#define  MapMaxY	50
 
 // Wymiary viewporta
 #define  ViewportW  80
@@ -24,11 +24,13 @@
 #define CavesPerLevel 9 //ilosc jaskiń na każdy poziom - dostosować do rozmiaru planszy!
 #define DTETR 2 //min. dystans do krawędzi potrzebny do odświeżenia widoku
 
-#define EnemyAmount 20 //ilosc przeciwnikow na lvl 0
+#define EnemyAmount 1 //ilosc przeciwnikow na lvl 0
 #define EnemyMultiplier 1.5 //mnożnik zwiększania siły oraz ilości przeciwników na kolejnym lvl
 #define EnemyStartHp 20
 #define EnemyStartDamage 5
 #define MaxEnemyNum 100		//maksymalna przewidziana ilosc przeciwnikow (ustawiona na sztywno bo tak.)
+
+#define SeeDistance 5 //zasięg wzroku przeciwników
 
 //kolory
 #define kolor_gracz 0x03
