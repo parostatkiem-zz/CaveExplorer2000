@@ -5,20 +5,6 @@
 #include <stdio.h>
 #include <conio.h>
 
-unsigned long hex2int(char *a, unsigned int len)
-{
-	int i;
-	unsigned long val = 0;
-
-	for (i = 0; i<len; i++)
-		if (a[i] <= 57)
-			val += (a[i] - 48)*(1 << (4 * (len - 1 - i)));
-		else
-			val += (a[i] - 55)*(1 << (4 * (len - 1 - i)));
-
-	return val;
-}
-
 
 void RefreshMap()
 {
@@ -76,4 +62,15 @@ void RefreshMap()
 	setColor(kolor_gracz);
 	putCharXY( player.X-viewport.X, player.Y - viewport.Y, blok_gracz);
 	setColor(0x0F);
+}
+
+void RefreshGui()
+{
+	char buf[256];
+	snprintf(buf, sizeof buf, "P: (%d,%d)",  player.X, player.Y);
+	putStrXY(ViewportW + 5,10, buf);
+
+
+	snprintf(buf, sizeof buf, "Enemy: (%d,%d)", enemies[0].position.X, enemies[0].position.Y);
+	putStrXY(ViewportW + 5, 13, buf);
 }

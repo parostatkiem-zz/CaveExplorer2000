@@ -1,8 +1,8 @@
 ﻿#pragma once
 #include <windows.h>
 // Wymiary planszy
-#define  MapMaxX   50
-#define  MapMaxY	50
+#define  MapMaxX   200
+#define  MapMaxY	200
 
 // Wymiary viewporta
 #define  ViewportW  80
@@ -19,12 +19,12 @@
 
 
 
-#define CaveSize 47 //prawdopodobienstwo w % generacji sąsiedniego segmentu jaskini (im wieksze, tym większe są jaskinie)
+#define CaveSize 48 //prawdopodobienstwo w % generacji sąsiedniego segmentu jaskini (im wieksze, tym większe są jaskinie)
 #define MinCaveSize 9 //minimalna ilość segmentów jednej jaskini 
 #define CavesPerLevel 9 //ilosc jaskiń na każdy poziom - dostosować do rozmiaru planszy!
 #define DTETR 2 //min. dystans do krawędzi potrzebny do odświeżenia widoku
 
-#define EnemyAmount 1 //ilosc przeciwnikow na lvl 0
+#define EnemyAmount 20 //ilosc przeciwnikow na lvl 0
 #define EnemyMultiplier 1.5 //mnożnik zwiększania siły oraz ilości przeciwników na kolejnym lvl
 #define EnemyStartHp 20
 #define EnemyStartDamage 5

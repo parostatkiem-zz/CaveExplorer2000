@@ -58,7 +58,7 @@ void InitializeLevel(int level)
 		tmp.X = RandomInt(1, MapMaxX - 1);
 		tmp.Y = RandomInt(1, MapMaxX - 1);
 
-		if (map[tmp.X][tmp.Y] == blok_pusty)
+		if (map[tmp.Y][tmp.X] == blok_pusty)
 		{
 			COORD tmp2;
 			tmp2.X = tmp.Y;
@@ -66,7 +66,7 @@ void InitializeLevel(int level)
 			e.position = tmp;
 			//wylosowana pozycja jest pusta. Stawianie przeciwnika
 			enemies[i] = e;
-			map[tmp.X][tmp.Y] = blok_przeciwnik;
+			map[tmp.Y][tmp.X] = blok_przeciwnik;
 		}
 		else
 			i--;
@@ -174,7 +174,7 @@ void Move()
 				TryMove(znak);
 				MoveEnemies();
 				CheckRefresh();
-		
+				RefreshGui();
 			}
 	
 
@@ -190,7 +190,7 @@ void TryMove(char direction)
 	switch (direction)
 	{ 
 	case 72: //gora
-		if ( map[player.X][player.Y - 1]==blok_pusty|| map[player.X ][player.Y - 1] == blok_zwykly)
+		if ( map[player.Y - 1][player.X ]==blok_pusty|| map[player.Y - 1][player.X] == blok_zwykly)
 		{
 			player.Y--;
 			putCharXY(player.X - viewport.X, player.Y - viewport.Y, blok_gracz);
@@ -198,7 +198,7 @@ void TryMove(char direction)
 		}
 		break;
 	case 80:  //dol
-		if (map[player.X][player.Y + 1] == blok_pusty || map[player.X][player.Y + 1] == blok_zwykly)
+		if (map[player.Y + 1][player.X] == blok_pusty || map[player.Y + 1][player.X] == blok_zwykly)
 		{
 			player.Y++;
 			putCharXY(player.X - viewport.X, player.Y - viewport.Y, blok_gracz);
@@ -206,7 +206,7 @@ void TryMove(char direction)
 		}
 		break;
 	case 77: //prawo
-		if (map[player.X + 1][player.Y ] == blok_pusty || map[player.X + 1][player.Y ] == blok_zwykly)
+		if (map[player.Y ][player.X+1 ] == blok_pusty || map[player.Y][player.X + 1] == blok_zwykly)
 		{
 			player.X++;
 			putCharXY(player.X - viewport.X, player.Y - viewport.Y, blok_gracz);
@@ -214,7 +214,7 @@ void TryMove(char direction)
 		}
 		break;
 	case 75: //lewo
-		if (map[player.X - 1][player.Y] == blok_pusty || map[player.X - 1][player.Y ] == blok_zwykly)
+		if (map[player.Y][player.X - 1] == blok_pusty || map[player.Y][player.X - 1] == blok_zwykly)
 		{
 			player.X--;
 			putCharXY(player.X - viewport.X, player.Y - viewport.Y, blok_gracz);
@@ -265,22 +265,22 @@ void MoveEnemies()
 				{
 					if (xDist > 0) //w lewo
 					{
-						if (map[enemies[i].position.X -1][enemies[i].position.Y ] == blok_pusty || map[enemies[i].position.X - 1][enemies[i].position.Y] == blok_gracz)
+						if (map[enemies[i].position.Y][enemies[i].position.X - 1] == blok_pusty || map[enemies[i].position.Y ][enemies[i].position.X - 1] == blok_gracz)
 						{
 							enemies[i].position.X--;
 							putCharXY(GetOnScreenPos(enemies[i].position).X, GetOnScreenPos(enemies[i].position).Y, blok_przeciwnik);
 							putCharXY(GetOnScreenPos(enemies[i].position).X+1, GetOnScreenPos(enemies[i].position).Y, blok_pusty);
-							map[enemies[i].position.X+1][enemies[i].position.Y] = blok_pusty;
+							map[enemies[i].position.Y][enemies[i].position.X + 1] = blok_pusty;
 						}
 					}
 					else //w prawo
 					{
-						if (map[enemies[i].position.X + 1][enemies[i].position.Y] == blok_pusty ||map[enemies[i].position.X + 1][enemies[i].position.Y] == blok_gracz)
+						if (map[enemies[i].position.Y ][enemies[i].position.X + 1] == blok_pusty ||map[enemies[i].position.Y ][enemies[i].position.X + 1] == blok_gracz)
 						{
 							enemies[i].position.X++;
 							putCharXY(GetOnScreenPos(enemies[i].position).X, GetOnScreenPos(enemies[i].position).Y, blok_przeciwnik);
 							putCharXY(GetOnScreenPos(enemies[i].position).X - 1, GetOnScreenPos(enemies[i].position).Y, blok_pusty);
-							map[enemies[i].position.X-1][enemies[i].position.Y] = blok_pusty;
+							map[enemies[i].position.Y][enemies[i].position.X - 1] = blok_pusty;
 						}
 					}
 				}
@@ -288,30 +288,34 @@ void MoveEnemies()
 				{
 					if (yDist > 0) //w gore
 					{
-						if (map[enemies[i].position.X ][enemies[i].position.Y - 1] == blok_pusty || map[enemies[i].position.X][enemies[i].position.Y - 1] == blok_gracz)
+						if (map[enemies[i].position.Y - 1][enemies[i].position.X ] == blok_pusty || map[enemies[i].position.Y-1][enemies[i].position.X ] == blok_gracz)
 						{
 							enemies[i].position.Y--;
 							putCharXY(GetOnScreenPos(enemies[i].position).X, GetOnScreenPos(enemies[i].position).Y, blok_przeciwnik);
 							putCharXY(GetOnScreenPos(enemies[i].position).X , GetOnScreenPos(enemies[i].position).Y + 1, blok_pusty);
-							map[enemies[i].position.X][enemies[i].position.Y+1] = blok_pusty;
+							map[enemies[i].position.Y + 1][enemies[i].position.X] = blok_pusty;
 						}
 					}
 					else //w dol
 					{
-						if (map[enemies[i].position.X][enemies[i].position.Y + 1] == blok_pusty|| map[enemies[i].position.X][enemies[i].position.Y + 1] == blok_pusty)
+						if (map[enemies[i].position.Y+1][enemies[i].position.X] == blok_pusty|| map[enemies[i].position.Y+1][enemies[i].position.X] == blok_pusty)
 						{
 							enemies[i].position.Y++;
 							putCharXY(GetOnScreenPos(enemies[i].position).X, GetOnScreenPos(enemies[i].position).Y, blok_przeciwnik);
 							putCharXY(GetOnScreenPos(enemies[i].position).X, GetOnScreenPos(enemies[i].position).Y - 1, blok_pusty);
-							map[enemies[i].position.X][enemies[i].position.Y-1] = blok_pusty;
+							map[enemies[i].position.Y - 1][enemies[i].position.X] = blok_pusty;
 						}
 					}
 				}
 			}
 			//koniec ruchu
-			map[enemies[i].position.X][enemies[i].position.Y] = blok_przeciwnik;
+			map[enemies[i].position.Y][enemies[i].position.X] = blok_przeciwnik;
 
 			setColor(0x0F);
+
+			//char buf[50];
+			//snprintf(buf, sizeof buf, "Enemy on map: (%d,%d)", player.X, player.Y);
+			//putStrXY(ViewportW + 5, 10, buf);
 		}
 	}
 }

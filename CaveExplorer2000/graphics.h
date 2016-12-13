@@ -6,3 +6,4 @@
 
 
 void RefreshMap();
+void RefreshGui();
