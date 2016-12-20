@@ -10,12 +10,18 @@ COORD player;
 COORD viewport;
 
 
+
 struct Enemy enemies[MaxEnemyNum];
 
 int main()
 {
 	
 	initScreen();
+
+	ShowMenu();
+
+
+
 	InitializeLevel(1);
 	
 	RefreshMap();

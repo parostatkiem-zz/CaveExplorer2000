@@ -15,3 +15,6 @@ void setColor( unsigned short id );
 
 // Pobieranie znaku z konsoli
 char getKey( void );
+
+//Wypisanie tekstu w ramce
+void drawMenuItem(int x, int y, unsigned short c, const char *s);

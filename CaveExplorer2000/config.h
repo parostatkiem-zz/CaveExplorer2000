@@ -40,6 +40,10 @@
 #define kolor_blok_przeciwnik 0x04
 #define kolor_tlo 0x0F
 
+#define kolor_menu_aktywny 0x0D
+#define kolor_menu 0x05
+#define kolor_logo 0x05
+
 
 //globalna definicja zmiennych
 extern unsigned char map[MapMaxX][MapMaxY];
@@ -54,3 +58,4 @@ extern struct Enemy
 
 };
 extern struct Enemy enemies[];
+

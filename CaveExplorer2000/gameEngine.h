@@ -21,5 +21,5 @@ void AddCaveSegment(COORD punkt);
 void InitializeLevel(int level);
 void Move();
 void TryMove(char direction);
-
+void ShowMenu();
 

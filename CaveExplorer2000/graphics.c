@@ -76,8 +76,8 @@ void RefreshMap()
 void RefreshGui()
 {
 	char buf[256];
-	snprintf(buf, sizeof buf, "P: (%d,%d)",  player.X, player.Y);
-	putStrXY(ViewportW + 5,10, buf);
+	//setColor
+	//int hpPercent = player
 
 
 	snprintf(buf, sizeof buf, "Enemy: (%d,%d)", enemies[0].position.X, enemies[0].position.Y);

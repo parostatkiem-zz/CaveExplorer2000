@@ -433,3 +433,60 @@ int CalculateDistance(COORD a, COORD b)
 {
 	return sqrt(pow((a.X-b.X),2)+ pow((a.Y - b.Y), 2));
 }
+
+void ShowMenu()
+{
+	unsigned char menuIndex = 0;
+	short colors[5] = { 0 };
+	int i = 0;
+	unsigned char c;
+	setColor(kolor_logo);
+	putStrXY(1, 0,  "  ___                ___          _                   ___ __   __   __ ");
+	putStrXY(1, 1,  " / __|__ ___ _____  | __|_ ___ __| |___ _ _ ___ _ _  |_  )  \\ /  \\ /  \\ ");
+	putStrXY(1, 2,  "| (__/ _` \\ V / -_) | _|\\ \\ / '_ \\ / _ \\ '_/ -_) '_|  / / () | () | () |");
+	putStrXY(1, 3,  " \\___\\__,_|\\_/\\___| |___/_\\_\\ .__/_\\___/_| \\___|_|   /___\\__/ \\__/ \\__/");
+	putStrXY(1, 4,  "                            |_|                                        ");
+	setColor(0x0F);
+	do
+	{
+		for (i = 0; i < 5; i++)
+		{
+			if (menuIndex == i)
+			{
+				colors[i] = kolor_menu_aktywny;
+			}
+			else
+			{
+				colors[i] = kolor_menu;
+			}
+		}
+
+
+		drawMenuItem(20, 7, colors[0], "Rozpocznij gre");
+		drawMenuItem(20, 12, colors[1], "Opcje");
+
+		drawMenuItem(20, 17, colors[2], "Zakoncz gre");
+
+
+
+		c = getKey();
+
+
+		if (c == 72) //gora
+		{
+			if (menuIndex >0)
+			{
+				menuIndex--;
+			}
+		}
+
+		if (c == 80)//dol
+		{
+			if (menuIndex < (5 - 1))
+			{
+				menuIndex++;
+			}
+		}
+
+	} while (1);
+}
