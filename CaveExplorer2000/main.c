@@ -5,7 +5,7 @@
 #include "init.h"
 
 unsigned char map[MapMaxX][MapMaxY];
-unsigned int GameState = 1;
+unsigned int GameState = 0;
 COORD player;
 COORD viewport;
 
@@ -25,7 +25,7 @@ int main()
 	InitializeLevel(1);
 	
 	RefreshMap();
-	
+	GameState = 1;
 
 	Move();
 

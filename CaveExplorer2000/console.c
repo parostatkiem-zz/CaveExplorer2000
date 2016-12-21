@@ -81,7 +81,7 @@ void drawMenuItem(int x, int y, unsigned short c, const char *s)
 		*t++;
 
 	}
-	setColor(0x05);
+	setColor(c);
 	for (i = 0; i <= num + 5; i++)
 	{
 		putCharXY(x + i - 1, y + 2, 0xCD);

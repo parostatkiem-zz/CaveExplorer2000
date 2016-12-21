@@ -176,6 +176,10 @@ void Move()
 				CheckRefresh();
 				RefreshGui();
 			}
+			if (znak == 27) //escape pressed
+			{
+				ShowMenu();
+			}
 	
 
 	} while (1);
@@ -436,17 +440,38 @@ int CalculateDistance(COORD a, COORD b)
 
 void ShowMenu()
 {
+	system("CLS");
 	unsigned char menuIndex = 0;
 	short colors[5] = { 0 };
 	int i = 0;
 	unsigned char c;
 	setColor(kolor_logo);
+	/*
 	putStrXY(1, 0,  "  ___                ___          _                   ___ __   __   __ ");
 	putStrXY(1, 1,  " / __|__ ___ _____  | __|_ ___ __| |___ _ _ ___ _ _  |_  )  \\ /  \\ /  \\ ");
 	putStrXY(1, 2,  "| (__/ _` \\ V / -_) | _|\\ \\ / '_ \\ / _ \\ '_/ -_) '_|  / / () | () | () |");
 	putStrXY(1, 3,  " \\___\\__,_|\\_/\\___| |___/_\\_\\ .__/_\\___/_| \\___|_|   /___\\__/ \\__/ \\__/");
 	putStrXY(1, 4,  "                            |_|                                        ");
+	*/
+
+	putStrXY(1, 0, "_________                    ___________             .__              ");
+	putStrXY(1, 1, "\\_   ___ \\_____ ___  __ ____ \\_   _____/__  ________ |  |   ___________  ___________ ");
+	putStrXY(1, 2, "/    \\  \\/\\__  \\\\  \\/ // __ \\ |    __)_\\  \\/  |____ \\|  |  /  _ \\_  __ \\/ __ \\_  __ \\");
+	putStrXY(1, 3, "\\     \\____/ __ \\\\   /\\  ___/ |        \\>    <|  |_> >  |_(  <_> )  | \\|  ___/|  | \\/");
+	putStrXY(1, 4, " \\______  (____  /\\_/  \\___  >_______  /__/\\_ \\   __/|____/\\____/|__|   \\___  >__|   ");
+	putStrXY(1, 5, "        \\/     \\/          \\/        \\/      \\/__|                          \\/       ");
+	
+	putStrXY(49, 7, "_______________  _______  _______   "); 
+	putStrXY(49, 8, "\\_____  \\   _  \\ \\   _  \\ \\   _  \\ ");
+	putStrXY(49, 9, " /  ____/  /_\\  \\/  /_\\  \\/  /_\\  \\ ");
+	putStrXY(49, 10, "/       \\  \\_/   \\  \\_/   \\  \\_/   \\");
+	putStrXY(49, 11, "\\_______ \\_____  /\\_____  /\\_____  /");
+	putStrXY(49, 12, "        \\/     \\/       \\/       \\/ ");
+
+	setColor(0x08);
+	putStrXY(60, 20, "by Jan Sudczak");
 	setColor(0x0F);
+
 	do
 	{
 		for (i = 0; i < 5; i++)
@@ -459,13 +484,21 @@ void ShowMenu()
 			{
 				colors[i] = kolor_menu;
 			}
+
+			
+		}
+		if (GameState != 1)
+		{
+			colors[1] = 0x08;
 		}
 
 
 		drawMenuItem(20, 7, colors[0], "Rozpocznij gre");
-		drawMenuItem(20, 12, colors[1], "Opcje");
 
-		drawMenuItem(20, 17, colors[2], "Zakoncz gre");
+		drawMenuItem(22, 12, colors[1], "Kontynuuj");
+		drawMenuItem(24, 17, colors[2], "Opcje");
+
+		drawMenuItem(21, 22, colors[3], "Zakoncz gre");
 
 
 
@@ -482,9 +515,47 @@ void ShowMenu()
 
 		if (c == 80)//dol
 		{
-			if (menuIndex < (5 - 1))
+			if (menuIndex < (4 - 1))
 			{
 				menuIndex++;
+			}
+		}
+
+
+
+
+		if (c == 13)//enter
+		{
+			switch (menuIndex)
+			{
+			case 0: //nowa gra
+				return;
+				break;
+			case 1: //kontynuuj
+
+				if (GameState == 1)
+				{
+					RefreshMap();
+					return;
+				}
+
+
+				break;
+			case 2: //opcje
+
+				break;
+			case 3: //wyjdz
+				exit(0);
+				break;
+			}
+		}
+
+		if (c == 27) //escape pressed
+		{
+			if (GameState == 1)
+			{
+				RefreshMap(); //kontunuuj gre
+				return;
 			}
 		}
 
