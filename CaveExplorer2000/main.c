@@ -18,21 +18,18 @@ int main()
 	
 	initScreen();
 
+
+	player.hp = PlayerStartHp - 3;
+	player.damage = PlayerStartDamage;
+	player.maxhp = PlayerStartHp;
+	player.exp = ExpToNextLevel;
+	player.nextLevelAt = ExpToNextLevel*2;
+	player.level = 1;
+
 	ShowMenu();
 
 
-	player.hp = PlayerStartHp -3;
-	player.damage = PlayerStartDamage;
-	player.maxhp = PlayerStartHp;
 
-
-	InitializeLevel(1);
-	
-	RefreshMap();
-	RefreshGui();
-	GameState = 1;
-
-	Move();
 
 	system("PAUSE");
    return 0;

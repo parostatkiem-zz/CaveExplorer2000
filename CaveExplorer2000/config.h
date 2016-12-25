@@ -32,6 +32,7 @@
 
 #define PlayerStartHp 30
 #define PlayerStartDamage 7
+#define ExpToNextLevel 10
 
 #define SeeDistance 6 //zasięg wzroku przeciwników
 #define Visibility 10 //zasięg wzroku gracza | obecnie nieużywany
@@ -59,6 +60,9 @@ extern struct playerClass
 	int maxhp;
 	int damage;
 	COORD position;
+	int level;
+	int exp;
+	int nextLevelAt;
 };
 extern struct playerClass player;
 extern struct Enemy

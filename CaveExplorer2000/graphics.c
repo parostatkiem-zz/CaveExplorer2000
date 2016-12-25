@@ -76,7 +76,7 @@ void RefreshMap()
 
 void RefreshGui()
 {
-	//char buf[256];
+	char buf[256];
 	//setColor
 	int hpPercent = player.hp * 15 /player.maxhp;
 		int i;
@@ -84,6 +84,8 @@ void RefreshGui()
 	//snprintf(buf, sizeof buf, "Enemy: (%d,%d)", enemies[0].position.X, enemies[0].position.Y);
 	
 		
+
+		///==========HP=========
 		setColor(kolor_menu);
 		putStrXY(ViewportW + 2, 1, "HP: ");
 		setColor(0x04);
@@ -97,6 +99,32 @@ void RefreshGui()
 				c = 176;
 			}
 
-			putCharXY(ViewportW + 5+i, 1, c);
+			putCharXY(ViewportW + 6+i, 1, c);
 		}
+		int dif = player.nextLevelAt - player.exp;
+		//int lvlPercent= 15-;
+		///==========HP=========
+		setColor(kolor_menu);
+		putStrXY(ViewportW + 2, 3, "LVL: ");
+		setColor(0x0A);
+		 c = 178;
+		for (int i = 1; i <= 15; i++)
+		{
+
+			if (i > lvlPercent)
+			{
+				setColor(0x08);
+				c = 176;
+			}
+
+			putCharXY(ViewportW + 6 + i, 3, c);
+		}
+		setColor(0x0A);
+
+		snprintf(buf, sizeof buf, "%d", player.level);
+		putStrXY(ViewportW + 7, 4, buf);
+		setColor(0x08);
+		snprintf(buf, sizeof buf, "%d", player.level+1);
+		putStrXY(ViewportW + 7+15-1, 4, buf);
+		
 }

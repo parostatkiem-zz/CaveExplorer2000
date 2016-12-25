@@ -178,6 +178,11 @@ void Move()
 			{
 				ShowMenu();
 			}
+
+			if (znak == 32) //space pressed
+			{
+				Atack();
+			}
 	
 
 	} while (1);
@@ -250,7 +255,7 @@ void MoveEnemies()
 	for (i = 0; i < MaxEnemyNum; i++) //pêtla po wszystkich przeciwnikach
 	{
 		if (enemies[i].position.X == 0 && enemies[i].position.Y == 0)
-			break; //koniec pêtli jeœli przeciwnik nie istnieje
+			continue; //koniec pêtli jeœli przeciwnik nie istnieje
 		
 		int tmp = CalculateDistance(enemies[i].position, player.position);
 		if (CalculateDistance(enemies[i].position, player.position) <= SeeDistance) //jeœli przeciwnik widzi gracza
@@ -522,6 +527,15 @@ void ShowMenu()
 			{
 			case 0: //nowa gra
 				system("CLS");
+
+				InitializeLevel(1);
+
+				RefreshMap();
+				RefreshGui();
+				GameState = 1;
+
+				Move();
+
 				return;
 				break;
 			case 1: //kontynuuj
@@ -554,4 +568,52 @@ void ShowMenu()
 		}
 
 	} while (1);
+}
+
+void Atack()
+{
+	int i = 0;
+	for (i = 0; i < MaxEnemyNum; i++) //pêtla po wszystkich przeciwnikach
+	{
+		if (enemies[i].position.X == 0 && enemies[i].position.Y == 0)
+			continue; //koniec pêtli jeœli przeciwnik nie istnieje
+
+		int tmp = CalculateDistance(enemies[i].position, player.position);
+		int s=CalculateDistance(enemies[i].position, player.position);
+		if (CalculateDistance(enemies[i].position, player.position) <= 2) //jeœli gracz jest obok przeciwnika
+		{
+			if (enemies[i].hp <= player.damage)//cios zabija przeciwnika
+			{
+				
+				COORD tmp = GetOnScreenPos(enemies[i].position);
+				
+				putCharXY(tmp.X, tmp.Y, blok_pusty); //usuniecie przeciwnika z widoku
+
+													 //usuniecie przeciwnika z mapy
+				map[enemies[i].position.Y][enemies[i].position.X] = blok_pusty;
+				enemies[i].position.X = 0;
+				enemies[i].position.Y = 0;//ustawienie przeciwnika jako niezywego
+
+
+			
+
+
+				if (player.exp >= ExpToNextLevel)
+				{
+					//gracz awansuje na nowy level
+					player.level++;
+			
+					player.nextLevelAt += ExpToNextLevel;
+					
+				}
+				
+				player.exp++;
+				RefreshGui();
+			}
+			else //cios tylko uszkadza przeciwnika
+			{
+				enemies[i].hp -= player.damage;
+			}
+		}
+	}
 }
