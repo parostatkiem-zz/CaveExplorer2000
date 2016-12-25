@@ -48,8 +48,15 @@
 //globalna definicja zmiennych
 extern unsigned char map[MapMaxX][MapMaxY];
 extern unsigned int GameState;
-extern COORD player;
+
 extern COORD viewport;
+extern struct playerClass
+{
+	int hp;
+	int damage;
+	COORD position;
+};
+extern struct playerClass player;
 extern struct Enemy
 {
 	int hp;

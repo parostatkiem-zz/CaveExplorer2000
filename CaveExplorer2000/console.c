@@ -4,7 +4,6 @@
 #include <stdio.h>
 #include <conio.h>
 
-//test
 void initScreen( void )
 {
    // Wymaga: windows.h
@@ -45,7 +44,6 @@ char getKey( void )
 {
    return getch();
 }
-
 
 void drawMenuItem(int x, int y, unsigned short c, const char *s)
 {

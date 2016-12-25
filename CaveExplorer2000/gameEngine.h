@@ -11,7 +11,6 @@
 #include <conio.h>
 
 
-static char *_map = map;
 int RandomInt(int min, int max);
 COORD GetOnScreenPos(COORD p);
 int CalculateDistance(COORD a, COORD b);

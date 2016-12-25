@@ -10,12 +10,13 @@
 
 void RefreshMap()
 {
+
 	int x = 0;
 	int y = 0;
 
 
-	viewport.X = player.X - ViewportW / 2;
-	viewport.Y = player.Y - ViewportH / 2;
+	viewport.X = player.position.X - ViewportW / 2;
+	viewport.Y = player.position.Y - ViewportH / 2;
 
 	
 	//system("CLS");
@@ -69,7 +70,7 @@ void RefreshMap()
 		printf("\n");
 	}
 	setColor(kolor_gracz);
-	putCharXY( player.X-viewport.X, player.Y - viewport.Y, blok_gracz);
+	putCharXY( player.position.X-viewport.X, player.position.Y - viewport.Y, blok_gracz);
 	setColor(0x0F);
 }
 

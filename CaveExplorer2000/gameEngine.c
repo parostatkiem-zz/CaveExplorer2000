@@ -7,7 +7,6 @@
 
 int CaveSegments = 0;
 
-
 void InitializeLevel(int level)
 {
 	srand(time(NULL));
@@ -81,7 +80,7 @@ void InitializeLevel(int level)
 
 }
 
- int RandomInt( int min,  int max)
+int RandomInt( int min,  int max)
 {
 	int r;
 	const unsigned int range = 1 + max - min;
@@ -97,14 +96,13 @@ void InitializeLevel(int level)
 	return min + (r / buckets);
 }
 
- void CheckRefresh()
+void CheckRefresh()
  {
-	 if (player.X - viewport.X <= DTETR || player.X - viewport.X >= ViewportW - DTETR || player.Y - viewport.Y <= DTETR || player.Y - viewport.Y >= ViewportH - DTETR)
+	 if (player.position.X - viewport.X <= DTETR || player.position.X - viewport.X >= ViewportW - DTETR || player.position.Y - viewport.Y <= DTETR || player.position.Y - viewport.Y >= ViewportH - DTETR)
 	 {
 		 RefreshMap();
 	 }
  }
-
 
 void AddCaveSegment(COORD punkt)
 {
@@ -151,7 +149,7 @@ void PlacePlayer()
 	if (b == c)
 	{
 		//map[tmp.X][tmp.Y] = blok_gracz;
-		player = tmp;
+		player.position = tmp;
 	
 		return;
 	}
@@ -189,45 +187,45 @@ void Move()
 
 void TryMove(char direction)
 {
-	COORD tmp = player;
+	COORD tmp = player.position;
 	setColor(kolor_gracz);
 	switch (direction)
 	{ 
 	case 72: //gora
-		if ( map[player.Y - 1][player.X ]==blok_pusty|| map[player.Y - 1][player.X] == blok_zwykly)
+		if ( map[player.position.Y - 1][player.position.X ]==blok_pusty|| map[player.position.Y - 1][player.position.X] == blok_zwykly)
 		{
-			player.Y--;
-			putCharXY(player.X - viewport.X, player.Y - viewport.Y, blok_gracz);
-			putCharXY(player.X - viewport.X, player.Y - viewport.Y + 1, blok_pusty);
+			player.position.Y--;
+			putCharXY(player.position.X - viewport.X, player.position.Y - viewport.Y, blok_gracz);
+			putCharXY(player.position.X - viewport.X, player.position.Y - viewport.Y + 1, blok_pusty);
 		}
 		break;
 	case 80:  //dol
-		if (map[player.Y + 1][player.X] == blok_pusty || map[player.Y + 1][player.X] == blok_zwykly)
+		if (map[player.position.Y + 1][player.position.X] == blok_pusty || map[player.position.Y + 1][player.position.X] == blok_zwykly)
 		{
-			player.Y++;
-			putCharXY(player.X - viewport.X, player.Y - viewport.Y, blok_gracz);
-			putCharXY(player.X - viewport.X , player.Y - viewport.Y - 1, blok_pusty);
+			player.position.Y++;
+			putCharXY(player.position.X - viewport.X, player.position.Y - viewport.Y, blok_gracz);
+			putCharXY(player.position.X - viewport.X , player.position.Y - viewport.Y - 1, blok_pusty);
 		}
 		break;
 	case 77: //prawo
-		if (map[player.Y ][player.X+1 ] == blok_pusty || map[player.Y][player.X + 1] == blok_zwykly)
+		if (map[player.position.Y ][player.position.X+1 ] == blok_pusty || map[player.position.Y][player.position.X + 1] == blok_zwykly)
 		{
-			player.X++;
-			putCharXY(player.X - viewport.X, player.Y - viewport.Y, blok_gracz);
-			putCharXY(player.X - viewport.X - 1, player.Y - viewport.Y , blok_pusty);
+			player.position.X++;
+			putCharXY(player.position.X - viewport.X, player.position.Y - viewport.Y, blok_gracz);
+			putCharXY(player.position.X - viewport.X - 1, player.position.Y - viewport.Y , blok_pusty);
 		}
 		break;
 	case 75: //lewo
-		if (map[player.Y][player.X - 1] == blok_pusty || map[player.Y][player.X - 1] == blok_zwykly)
+		if (map[player.position.Y][player.position.X - 1] == blok_pusty || map[player.position.Y][player.position.X - 1] == blok_zwykly)
 		{
-			player.X--;
-			putCharXY(player.X - viewport.X, player.Y - viewport.Y, blok_gracz);
-			putCharXY(player.X - viewport.X + 1, player.Y - viewport.Y , blok_pusty);
+			player.position.X--;
+			putCharXY(player.position.X - viewport.X, player.position.Y - viewport.Y, blok_gracz);
+			putCharXY(player.position.X - viewport.X + 1, player.position.Y - viewport.Y , blok_pusty);
 			
 		}
 		break;
 	}
-	map[player.Y][player.X] = blok_pusty;
+	map[player.position.Y][player.position.X] = blok_pusty;
 
 	setColor(0x0F);
 
@@ -254,18 +252,18 @@ void MoveEnemies()
 		if (enemies[i].position.X == 0 && enemies[i].position.Y == 0)
 			break; //koniec pêtli jeœli przeciwnik nie istnieje
 		
-		int tmp = CalculateDistance(enemies[i].position, player);
-		if (CalculateDistance(enemies[i].position, player) <= SeeDistance) //jeœli przeciwnik widzi gracza
+		int tmp = CalculateDistance(enemies[i].position, player.position);
+		if (CalculateDistance(enemies[i].position, player.position) <= SeeDistance) //jeœli przeciwnik widzi gracza
 		{
 			setColor(kolor_blok_przeciwnik);
-			if (CalculateDistance(enemies[i].position, player) <= 1) //przeciwnik stoi ko³o gracza
+			if (CalculateDistance(enemies[i].position, player.position) <= 1) //przeciwnik stoi ko³o gracza
 			{
 
 			}
 			else //przeciwnik idzie w kierunku gracza
 			{
-				xDist = enemies[i].position.X - player.X;
-				yDist = enemies[i].position.Y - player.Y;
+				xDist = enemies[i].position.X - player.position.X;
+				yDist = enemies[i].position.Y - player.position.Y;
 				if (abs(xDist) > abs(yDist)) //przeciwnik porusza siê w osi poziomej
 				{
 					if (xDist > 0) //w lewo
@@ -427,7 +425,7 @@ void MoveEnemies()
 			setColor(0x0F);
 
 			//char buf[50];
-			//snprintf(buf, sizeof buf, "Enemy on map: (%d,%d)", player.X, player.Y);
+			//snprintf(buf, sizeof buf, "Enemy on map: (%d,%d)", player.position.X, player.position.Y);
 			//putStrXY(ViewportW + 5, 10, buf);
 		}
 	}
@@ -523,12 +521,14 @@ void ShowMenu()
 			switch (menuIndex)
 			{
 			case 0: //nowa gra
+				system("CLS");
 				return;
 				break;
 			case 1: //kontynuuj
 
 				if (GameState == 1)
 				{
+					
 					RefreshMap();
 					return;
 				}
