@@ -76,11 +76,27 @@ void RefreshMap()
 
 void RefreshGui()
 {
-	char buf[256];
+	//char buf[256];
 	//setColor
-	//int hpPercent = player
+	int hpPercent = player.hp * 15 /player.maxhp;
+		int i;
 
+	//snprintf(buf, sizeof buf, "Enemy: (%d,%d)", enemies[0].position.X, enemies[0].position.Y);
+	
+		
+		setColor(kolor_menu);
+		putStrXY(ViewportW + 2, 1, "HP: ");
+		setColor(0x04);
+		char c = 178;
+		for (int i = 1; i <= 15; i++)
+		{
+		
+			if (i > hpPercent)
+			{
+				setColor(0x08);
+				c = 176;
+			}
 
-	snprintf(buf, sizeof buf, "Enemy: (%d,%d)", enemies[0].position.X, enemies[0].position.Y);
-	putStrXY(ViewportW + 5, 13, buf);
+			putCharXY(ViewportW + 5+i, 1, c);
+		}
 }

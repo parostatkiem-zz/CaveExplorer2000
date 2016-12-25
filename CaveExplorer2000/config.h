@@ -30,8 +30,11 @@
 #define EnemyStartDamage 5
 #define MaxEnemyNum 100		//maksymalna przewidziana ilosc przeciwnikow (ustawiona na sztywno bo tak.)
 
+#define PlayerStartHp 30
+#define PlayerStartDamage 7
+
 #define SeeDistance 6 //zasięg wzroku przeciwników
-#define Visibility 10 //zasięg wzroku gracza
+#define Visibility 10 //zasięg wzroku gracza | obecnie nieużywany
 
 //kolory
 #define kolor_gracz 0x03
@@ -53,6 +56,7 @@ extern COORD viewport;
 extern struct playerClass
 {
 	int hp;
+	int maxhp;
 	int damage;
 	COORD position;
 };

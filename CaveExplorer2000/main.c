@@ -21,10 +21,15 @@ int main()
 	ShowMenu();
 
 
+	player.hp = PlayerStartHp -3;
+	player.damage = PlayerStartDamage;
+	player.maxhp = PlayerStartHp;
+
 
 	InitializeLevel(1);
 	
 	RefreshMap();
+	RefreshGui();
 	GameState = 1;
 
 	Move();
