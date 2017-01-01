@@ -27,13 +27,17 @@
 #define EnemyAmount 20 //ilosc przeciwnikow na lvl 0
 #define EnemyMultiplier 1.5 //mnożnik zwiększania siły oraz ilości przeciwników na kolejnym lvl
 #define EnemyStartHp 20
-#define EnemyStartDamage 5
+#define EnemyStartDamage 4
 #define MaxEnemyNum 100		//maksymalna przewidziana ilosc przeciwnikow (ustawiona na sztywno bo tak.)
 
-#define PlayerStartHp 30
+#define PlayerStartHp 35
 #define PlayerStartDamage 7
 #define ExpToNextLevel 10
+#define PlayerDamageMultiplier 1.3 //mnożnik zwiększenia obrażeń gracza na każdy level
 
+
+
+#define MinDamageMultiplier 0.6 //mnożlik minimalnych obrażen względem pełnych obrażeń
 #define SeeDistance 6 //zasięg wzroku przeciwników
 #define Visibility 10 //zasięg wzroku gracza | obecnie nieużywany
 

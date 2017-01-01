@@ -77,11 +77,11 @@ void RefreshMap()
 void RefreshGui()
 {
 	char buf[256];
-	//setColor
+
 	int hpPercent = player.hp * 15 /player.maxhp;
 		int i;
 
-	//snprintf(buf, sizeof buf, "Enemy: (%d,%d)", enemies[0].position.X, enemies[0].position.Y);
+
 	
 		
 
@@ -101,13 +101,14 @@ void RefreshGui()
 
 			putCharXY(ViewportW + 6+i, 1, c);
 		}
-		//int dif = player.nextLevelAt - player.exp;
 	
-		int pkt_w_tym_lvl;
-		//pkt_w_tym_lvl = player.exp - player.nextLevelAt + ExpToNextLevel;
+		setColor(0x04);
 
-		int lvlPercent= player.exp*15/ExpToNextLevel;
-		///==========HP=========
+		snprintf(buf, sizeof buf, "%d", player.hp);
+		putStrXY(ViewportW + 6+15+2, 1, buf);  //current level number
+		
+		///==========LVL=========
+		int lvlPercent = player.exp * 15 / ExpToNextLevel;
 		setColor(0x0F);
 		putStrXY(ViewportW + 2, 3, "LVL: ");
 		setColor(0x0A);
@@ -126,10 +127,19 @@ void RefreshGui()
 		setColor(0x0A);
 
 		snprintf(buf, sizeof buf, "%d", player.level);
-		putStrXY(ViewportW + 7, 4, buf);
+		putStrXY(ViewportW + 7, 4, buf);  //current level number
 		setColor(0x08);
+
+
 		snprintf(buf, sizeof buf, "%d", player.level+1);
-		putStrXY(ViewportW + 7+15-1, 4, buf);
+		putStrXY(ViewportW + 7+15-1, 4, buf); //next level number
+
+
+		setColor(0x0F);
+		putStrXY(ViewportW + 2, 6, "DMG: ");
+		setColor(kolor_menu_aktywny);
+		snprintf(buf, sizeof buf, "%d", player.damage);
+		putStrXY(ViewportW + 7, 6, buf); //player damage number
 
 
 	

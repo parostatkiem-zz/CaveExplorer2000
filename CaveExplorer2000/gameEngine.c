@@ -263,6 +263,12 @@ void MoveEnemies()
 			setColor(kolor_blok_przeciwnik);
 			if (CalculateDistance(enemies[i].position, player.position) <= 1) //przeciwnik stoi ko³o gracza
 			{
+				//atakuje
+				int obrazenia = RandomInt(MinDamageMultiplier*enemies[i].damage, enemies[i].damage);
+				if (player.hp - obrazenia > 0)
+					player.hp -= obrazenia; //gracz otrzymuje cios
+				//else
+					//Death();   //gracz umiera
 
 			}
 			else //przeciwnik idzie w kierunku gracza
@@ -576,13 +582,14 @@ void Atack()
 	for (i = 0; i < MaxEnemyNum; i++) //pêtla po wszystkich przeciwnikach
 	{
 		if (enemies[i].position.X == 0 && enemies[i].position.Y == 0)
-			continue; //koniec pêtli jeœli przeciwnik nie istnieje
+			continue; //pominiecie przeciwnija jeœli nie istnieje
 
 		int tmp = CalculateDistance(enemies[i].position, player.position);
 		int s=CalculateDistance(enemies[i].position, player.position);
 		if (CalculateDistance(enemies[i].position, player.position) <= 2) //jeœli gracz jest obok przeciwnika
 		{
-			if (enemies[i].hp <= player.damage)//cios zabija przeciwnika
+			int obrazenia = RandomInt(MinDamageMultiplier*player.damage, player.damage);
+			if (enemies[i].hp <= obrazenia)//cios zabija przeciwnika
 			{
 				
 				COORD tmp = GetOnScreenPos(enemies[i].position);
@@ -604,6 +611,9 @@ void Atack()
 					player.level++;
 			
 					player.exp =-1;
+
+					player.damage *= PlayerDamageMultiplier;
+
 					
 				}
 				
@@ -612,8 +622,13 @@ void Atack()
 			}
 			else //cios tylko uszkadza przeciwnika
 			{
-				enemies[i].hp -= player.damage;
+				enemies[i].hp -= obrazenia;
 			}
+
+
+			MoveEnemies();
+			RefreshGui();
 		}
 	}
+	
 }

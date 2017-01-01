@@ -22,3 +22,4 @@ void Move();
 void TryMove(char direction);
 void ShowMenu();
 void Atack();
+void Death();
