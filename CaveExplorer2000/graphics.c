@@ -86,7 +86,7 @@ void RefreshGui()
 		
 
 		///==========HP=========
-		setColor(kolor_menu);
+		setColor(0x0f);
 		putStrXY(ViewportW + 2, 1, "HP: ");
 		setColor(0x04);
 		char c = 178;
@@ -101,10 +101,14 @@ void RefreshGui()
 
 			putCharXY(ViewportW + 6+i, 1, c);
 		}
-		int dif = player.nextLevelAt - player.exp;
-		//int lvlPercent= 15-;
+		//int dif = player.nextLevelAt - player.exp;
+	
+		int pkt_w_tym_lvl;
+		//pkt_w_tym_lvl = player.exp - player.nextLevelAt + ExpToNextLevel;
+
+		int lvlPercent= player.exp*15/ExpToNextLevel;
 		///==========HP=========
-		setColor(kolor_menu);
+		setColor(0x0F);
 		putStrXY(ViewportW + 2, 3, "LVL: ");
 		setColor(0x0A);
 		 c = 178;
@@ -126,5 +130,8 @@ void RefreshGui()
 		setColor(0x08);
 		snprintf(buf, sizeof buf, "%d", player.level+1);
 		putStrXY(ViewportW + 7+15-1, 4, buf);
+
+
+	
 		
 }

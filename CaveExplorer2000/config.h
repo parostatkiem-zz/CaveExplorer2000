@@ -62,7 +62,7 @@ extern struct playerClass
 	COORD position;
 	int level;
 	int exp;
-	int nextLevelAt;
+
 };
 extern struct playerClass player;
 extern struct Enemy

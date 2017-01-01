@@ -22,8 +22,8 @@ int main()
 	player.hp = PlayerStartHp - 3;
 	player.damage = PlayerStartDamage;
 	player.maxhp = PlayerStartHp;
-	player.exp = ExpToNextLevel;
-	player.nextLevelAt = ExpToNextLevel*2;
+	player.exp =9;
+
 	player.level = 1;
 
 	ShowMenu();

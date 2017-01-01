@@ -603,7 +603,7 @@ void Atack()
 					//gracz awansuje na nowy level
 					player.level++;
 			
-					player.nextLevelAt += ExpToNextLevel;
+					player.exp =-1;
 					
 				}
 				
