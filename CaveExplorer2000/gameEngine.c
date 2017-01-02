@@ -167,12 +167,16 @@ void Move()
 	{
 		znak = getKey();
 				if (znak == 0 || znak == 0xE0) znak = getKey();
+
 			if(znak==72|| znak == 80 || znak == 77 || znak == 75)
 			{
+				ClearLog();
+		
 				TryMove(znak);
 				MoveEnemies();
 				CheckRefresh();
 				RefreshGui();
+				
 			}
 			if (znak == 27) //escape pressed
 			{
@@ -181,7 +185,10 @@ void Move()
 
 			if (znak == 32) //space pressed
 			{
+				ClearLog();
+			
 				Atack();
+			
 			}
 	
 
@@ -263,12 +270,15 @@ void MoveEnemies()
 			setColor(kolor_blok_przeciwnik);
 			if (CalculateDistance(enemies[i].position, player.position) <= 1) //przeciwnik stoi ko³o gracza
 			{
-				//atakuje
+				//przeciwnik atakuje
 				int obrazenia = RandomInt(MinDamageMultiplier*enemies[i].damage, enemies[i].damage);
 				if (player.hp - obrazenia > 0)
+				{
 					player.hp -= obrazenia; //gracz otrzymuje cios
-				//else
-					//Death();   //gracz umiera
+					Log("Otrzymales obrazenia: ", -obrazenia);
+				}
+				else
+					Death();   //gracz umiera
 
 			}
 			else //przeciwnik idzie w kierunku gracza
@@ -589,6 +599,9 @@ void Atack()
 		if (CalculateDistance(enemies[i].position, player.position) <= 2) //jeœli gracz jest obok przeciwnika
 		{
 			int obrazenia = RandomInt(MinDamageMultiplier*player.damage, player.damage);
+
+
+			Log("Zadales obrazenia", obrazenia);
 			if (enemies[i].hp <= obrazenia)//cios zabija przeciwnika
 			{
 				
@@ -602,7 +615,7 @@ void Atack()
 				enemies[i].position.Y = 0;//ustawienie przeciwnika jako niezywego
 
 
-			
+				Log("Zabiles przeciwnika!", 0);
 
 
 				if (player.exp >= ExpToNextLevel)
@@ -623,6 +636,7 @@ void Atack()
 			else //cios tylko uszkadza przeciwnika
 			{
 				enemies[i].hp -= obrazenia;
+				
 			}
 
 
@@ -631,4 +645,9 @@ void Atack()
 		}
 	}
 	
+}
+
+void Death()
+{
+
 }

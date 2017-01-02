@@ -6,6 +6,7 @@
 
 unsigned char map[MapMaxX][MapMaxY];
 unsigned int GameState = 0;
+unsigned int LogLevel = 0;
 struct playerClass player;
 COORD viewport;
 

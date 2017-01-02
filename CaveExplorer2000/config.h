@@ -30,7 +30,7 @@
 #define EnemyStartDamage 4
 #define MaxEnemyNum 100		//maksymalna przewidziana ilosc przeciwnikow (ustawiona na sztywno bo tak.)
 
-#define PlayerStartHp 35
+#define PlayerStartHp 50
 #define PlayerStartDamage 7
 #define ExpToNextLevel 10
 #define PlayerDamageMultiplier 1.3 //mnożnik zwiększenia obrażeń gracza na każdy level
@@ -56,6 +56,7 @@
 //globalna definicja zmiennych
 extern unsigned char map[MapMaxX][MapMaxY];
 extern unsigned int GameState;
+extern unsigned int LogLevel;
 
 extern COORD viewport;
 extern struct playerClass

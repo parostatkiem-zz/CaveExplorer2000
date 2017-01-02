@@ -6,7 +6,7 @@
 #include <conio.h>
 
 
-
+char buf[256];
 
 void RefreshMap()
 {
@@ -76,7 +76,7 @@ void RefreshMap()
 
 void RefreshGui()
 {
-	char buf[256];
+
 
 	int hpPercent = player.hp * 15 /player.maxhp;
 		int i;
@@ -138,10 +138,51 @@ void RefreshGui()
 		setColor(0x0F);
 		putStrXY(ViewportW + 2, 6, "DMG: ");
 		setColor(kolor_menu_aktywny);
-		snprintf(buf, sizeof buf, "%d", player.damage);
+		snprintf(buf, sizeof buf, "%d - %d", (int)(player.damage * MinDamageMultiplier), player.damage);
 		putStrXY(ViewportW + 7, 6, buf); //player damage number
 
 
 	
 		
+}
+
+void Log(char* text, int num)
+{
+	
+
+
+//	putStrXY(ViewportW + 7, 4, buf);  //current level number
+
+	
+	if (num <0)
+	{
+		//gracz przyjal obrazenia
+		setColor(0x04);
+		snprintf(buf, sizeof buf, "%s: %d", text, -num);
+	}
+	else if (num > 0)
+	{
+		//gracz zadal obrazenia
+		setColor(0x0A);
+		snprintf(buf, sizeof buf, "%s: %d", text, num);
+
+	}
+	else
+	{
+		//inna wiadomosc
+		setColor(0x0F);
+		snprintf(buf, sizeof buf, "%s", text);
+	}
+	putStrXY(ViewportW + 1, ViewportH - 1 - LogLevel, buf);  
+	LogLevel++;
+}
+
+void ClearLog()
+{
+	LogLevel = 0;
+	int i = 0;
+	for (i = 8; i < ViewportH; i++)
+	{
+		putStrXY(ViewportW + 1,i , "                                      ");
+	}
 }
