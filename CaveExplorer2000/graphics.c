@@ -139,7 +139,7 @@ void RefreshGui()
 		putStrXY(ViewportW + 2, 6, "DMG: ");
 		setColor(kolor_menu_aktywny);
 		snprintf(buf, sizeof buf, "%d - %d", (int)(player.damage * MinDamageMultiplier), player.damage);
-		putStrXY(ViewportW + 7, 6, buf); //player damage number
+		putStrXY(ViewportW + 7, 6, buf); //player min and max damage number
 
 
 	
@@ -170,7 +170,7 @@ void Log(char* text, int num)
 	else
 	{
 		//inna wiadomosc
-		setColor(0x0F);
+		setColor(0x08);
 		snprintf(buf, sizeof buf, "%s", text);
 	}
 	putStrXY(ViewportW + 1, ViewportH - 1 - LogLevel, buf);  

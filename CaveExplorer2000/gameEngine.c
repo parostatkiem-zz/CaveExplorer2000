@@ -171,7 +171,7 @@ void Move()
 			if(znak==72|| znak == 80 || znak == 77 || znak == 75)
 			{
 				ClearLog();
-		
+				RegenerateLife();
 				TryMove(znak);
 				MoveEnemies();
 				CheckRefresh();
@@ -186,7 +186,7 @@ void Move()
 			if (znak == 32) //space pressed
 			{
 				ClearLog();
-			
+				RegenerateLife();
 				Atack();
 			
 			}
@@ -627,6 +627,8 @@ void Atack()
 
 					player.damage *= PlayerDamageMultiplier;
 
+					Log("Awansowales na wyzszy poziom!!", 0);
+
 					
 				}
 				
@@ -650,4 +652,16 @@ void Atack()
 void Death()
 {
 
+}
+
+void RegenerateLife()
+{
+	if (Turns >= HPregenRate)
+	{
+		Turns = 0;
+		if(player.hp<PlayerStartHp)
+		player.hp++;
+	}
+	else
+		Turns++;
 }

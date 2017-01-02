@@ -34,7 +34,7 @@
 #define PlayerStartDamage 7
 #define ExpToNextLevel 10
 #define PlayerDamageMultiplier 1.3 //mnożnik zwiększenia obrażeń gracza na każdy level
-
+#define HPregenRate 3 //uzdrawia gracza o 1hp co X ruchów
 
 
 #define MinDamageMultiplier 0.6 //mnożlik minimalnych obrażen względem pełnych obrażeń
@@ -57,6 +57,7 @@
 extern unsigned char map[MapMaxX][MapMaxY];
 extern unsigned int GameState;
 extern unsigned int LogLevel;
+extern unsigned int Turns;
 
 extern COORD viewport;
 extern struct playerClass
