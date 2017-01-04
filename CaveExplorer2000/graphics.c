@@ -11,6 +11,9 @@ char buf[256];
 void RefreshMap()
 {
 
+	if (GameState != 1)
+		return;
+
 	int x = 0;
 	int y = 0;
 
@@ -71,13 +74,23 @@ void RefreshMap()
 	}
 	setColor(kolor_gracz);
 	putCharXY( player.position.X-viewport.X, player.position.Y - viewport.Y, blok_gracz);
+
+
+	//czy portal jest w zasiêgu mapy
+	tmp= GetOnScreenPos(portal);
+	if(tmp.X>=0 && tmp.X<=ViewportW &&tmp.Y >= 0 && tmp.Y <= ViewportH)
+	{ 
+		setColor(kolor_portal);
+		putCharXY(portal.X - viewport.X, portal.Y - viewport.Y, blok_portal);
+	}
 	setColor(0x0F);
 }
 
 void RefreshGui()
 {
 
-
+	if (GameState != 1)
+		return;
 	int hpPercent = player.hp * 15 /player.maxhp;
 		int i;
 
@@ -141,6 +154,15 @@ void RefreshGui()
 		snprintf(buf, sizeof buf, "%d - %d", (int)(player.damage * MinDamageMultiplier), player.damage);
 		putStrXY(ViewportW + 7, 6, buf); //player min and max damage number
 
+		//==============DEBUG============
+		//snprintf(buf, sizeof buf, "Player: %d,%d", player.position.X,player.position.Y);
+		//putStrXY(ViewportW + 7 , 6, buf); //next level number
+
+		//snprintf(buf, sizeof buf, "Portal: %d,%d", portal.X, portal.Y);
+		//putStrXY(ViewportW + 7 , 7, buf); //next level number
+
+
+
 
 	
 		
@@ -185,4 +207,41 @@ void ClearLog()
 	{
 		putStrXY(ViewportW + 1,i , "                                      ");
 	}
+}
+
+void ShowDeathScreen()
+{
+	system("cls");
+	setColor(kolor_logo);
+	printf("                                     ____\n");
+	printf("                              __,---'     `--.__\n");
+	printf("                           ,-'                ; `.\n");
+	printf("                          ,'                  `--.`--.\n");
+	printf("                         ,'                       `._ `-.\n");
+	printf("                         ;                     ;     `-- ;\n");
+	printf("                       ,-'-_       _,-~~-.      ,--      `.\n");
+	printf("                       ;;   `-,;    ,'~`.__    ,;;;    ;  ;\n");
+	printf("                       ;;    ;,'  ,;;      `,  ;;;     `. ;\n");
+	printf("                       `:   ,'    `:;     __/  `.;      ; ;\n");
+	printf("                        ;~~^.   `.   `---'~~    ;;      ; ;\n");
+	printf("                        `,' `.   `.            .;;;     ;'\n");
+	printf("                        ,',^. `.  `._    __    `:;     ,'\n");
+	printf("                        `-' `--'    ~`--'~~`--.  ~    ,'\n");
+	printf("                       /;`-;_ ; ;. /. /   ; ~~`-.     ;\n");
+	printf("-._                   ; ;  ; `,;`-;__;---;      `----'\n");
+	printf("   `--.__             ``-`-;__;:  ;  ;__;\n");
+	printf(" ...     `--.__                `-- `-'\n");
+	printf("`--.:::...     `--.__                ____\n");
+	printf("    `--:::::--.      `--.__    __,--'    `.\n");
+	printf("        `--:::`;....       `--'       ___  `.\n");
+	printf("            `--`-:::...     __           )  ;\n");
+	printf("                  ~`-:::...   `---.      ( ,'\n");
+	printf("                      ~`-:::::::::`--.   `-.\n");
+	printf("                          ~`-::::::::`.    ;\n");
+	printf("                              ~`--:::,'   ,'\n");
+	printf("                                   ~~`--'~\n");
+
+
+	//przezyles xxx itd.
+
 }

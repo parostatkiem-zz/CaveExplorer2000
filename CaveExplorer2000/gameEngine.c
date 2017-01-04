@@ -76,6 +76,7 @@ void InitializeLevel(int level)
 	//ustawianie gracza
 	PlacePlayer();
 
+	PlacePortal();
 
 
 }
@@ -141,7 +142,7 @@ void PlacePlayer()
 {
 	COORD tmp;
 	tmp.X = RandomInt(1, MapMaxX - 1);
-	tmp.Y = RandomInt(1, MapMaxX - 1);
+	tmp.Y = RandomInt(1, MapMaxY - 1);
 
 	unsigned char b = map[tmp.Y][tmp.X];
 	unsigned char c = blok_pusty;
@@ -191,6 +192,8 @@ void Move()
 			
 			}
 	
+
+
 
 	} while (1);
 
@@ -275,7 +278,7 @@ void MoveEnemies()
 				if (player.hp - obrazenia > 0)
 				{
 					player.hp -= obrazenia; //gracz otrzymuje cios
-					Log("Otrzymales obrazenia: ", -obrazenia);
+					Log("Otrzymales obrazenia", -obrazenia);
 				}
 				else
 					Death();   //gracz umiera
@@ -543,12 +546,13 @@ void ShowMenu()
 			{
 			case 0: //nowa gra
 				system("CLS");
-
-				InitializeLevel(1);
+				GameState = 1;
+				CurrentLevel = 0;
+				InitializeLevel(CurrentLevel);
 
 				RefreshMap();
 				RefreshGui();
-				GameState = 1;
+		
 
 				Move();
 
@@ -651,7 +655,10 @@ void Atack()
 
 void Death()
 {
+	GameState = 0;
 
+	ShowDeathScreen();
+	
 }
 
 void RegenerateLife()
@@ -664,4 +671,28 @@ void RegenerateLife()
 	}
 	else
 		Turns++;
+}
+
+
+void PlacePortal()
+{
+	COORD tmp;
+	tmp.X = RandomInt(1, MapMaxX - 1);
+	tmp.Y = RandomInt(1, MapMaxY - 1);
+
+	unsigned char b = map[tmp.Y][tmp.X];
+	unsigned char c = blok_pusty;
+
+	if (b == c)
+	{
+		//map[tmp.X][tmp.Y] = blok_gracz;
+		portal = tmp;
+
+		return;
+	}
+	else
+	{
+		PlacePortal();
+	}
+
 }

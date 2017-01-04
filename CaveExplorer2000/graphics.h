@@ -12,3 +12,5 @@ void Log(char* text, int num);
 
 
 void ClearLog();
+
+void ShowDeathScreen();

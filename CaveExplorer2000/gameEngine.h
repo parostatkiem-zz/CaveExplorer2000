@@ -24,3 +24,4 @@ void ShowMenu();
 void Atack();
 void Death();
 void RegenerateLife();
+void PlacePortal();

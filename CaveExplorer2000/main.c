@@ -8,8 +8,10 @@ unsigned char map[MapMaxX][MapMaxY];
 unsigned int GameState = 0;
 unsigned int LogLevel = 0;
 unsigned int Turns = 0;
+unsigned int CurrentLevel = 0;
 struct playerClass player;
 COORD viewport;
+COORD portal;
 
 
 
@@ -29,8 +31,6 @@ int main()
 	player.level = 1;
 
 	ShowMenu();
-
-
 
 
 	system("PAUSE");
