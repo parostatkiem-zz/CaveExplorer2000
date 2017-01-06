@@ -178,6 +178,7 @@ void Move()
 				ClearLog();
 				RegenerateLife();
 				TryMove(znak);
+				CheckPortal();
 				MoveEnemies();
 				CheckRefresh();
 				RefreshGui();
@@ -699,3 +700,10 @@ void PlacePortal()
 
 }
 
+void CheckPortal() //sprawdza, czy gracz w³aœnie wszed³ w portal
+{
+	if (player.position.X == portal.X && player.position.Y == portal.Y)
+	{
+		InitializeLevel(++CurrentLevel);
+	}
+}

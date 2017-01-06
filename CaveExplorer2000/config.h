@@ -20,7 +20,7 @@
 
 
 
-#define CaveSize 48 //prawdopodobienstwo w % generacji sąsiedniego segmentu jaskini (im wieksze, tym większe są jaskinie)
+#define CaveSize 49 //prawdopodobienstwo w % generacji sąsiedniego segmentu jaskini (im wieksze, tym większe są jaskinie)
 #define MinCaveSize 10 //minimalna ilość segmentów jednej jaskini 
 #define CavesPerLevel 10 //ilosc jaskiń na każdy poziom - dostosować do rozmiaru planszy!
 #define DTETR 2 //min. dystans do krawędzi potrzebny do odświeżenia widoku - RACZEJ NIE ZMIENIAć
