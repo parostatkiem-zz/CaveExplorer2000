@@ -35,7 +35,7 @@
 #define PlayerStartDamage 7
 #define ExpToNextLevel 10
 #define PlayerDamageMultiplier 1.3 //mnożnik zwiększenia obrażeń gracza na każdy level
-#define HPregenRate 5 //uzdrawia gracza o 1hp co X ruchów
+#define HPregenRate 7 //uzdrawia gracza o 1hp co X ruchów -> im mniejsza wartosc, tym szybciej rośnie HP
 
 
 #define MinDamageMultiplier 0.6 //mnożlik minimalnych obrażen względem pełnych obrażeń

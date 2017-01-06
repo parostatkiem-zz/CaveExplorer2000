@@ -4,8 +4,9 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <conio.h>
+#include <math.h>
 
-
+int lastI = 0;
 char buf[256];
 
 void RefreshMap()
@@ -99,8 +100,7 @@ void RefreshGui()
 		
 
 		///==========HP=========
-		setColor(0x0f);
-		putStrXY(ViewportW + 2, 1, "HP: ");
+	
 		setColor(0x04);
 		char c = 178;
 		for (int i = 1; i <= 15; i++)
@@ -122,8 +122,8 @@ void RefreshGui()
 		
 		///==========LVL=========
 		int lvlPercent = player.exp * 15 / ExpToNextLevel;
-		setColor(0x0F);
-		putStrXY(ViewportW + 2, 3, "LVL: ");
+	
+
 		setColor(0x0A);
 		 c = 178;
 		for (int i = 1; i <= 15; i++)
@@ -148,24 +148,66 @@ void RefreshGui()
 		putStrXY(ViewportW + 7+15-1, 4, buf); //next level number
 
 
-		setColor(0x0F);
-		putStrXY(ViewportW + 2, 6, "DMG: ");
+		
 		setColor(kolor_menu_aktywny);
 		snprintf(buf, sizeof buf, "%d - %d", (int)(player.damage * MinDamageMultiplier), player.damage);
 		putStrXY(ViewportW + 7, 6, buf); //player min and max damage number
 
+	/*	///==========Portal=========
+		
+
+		float maxDist = sqrt(pow(MapMaxX,2)+ pow(MapMaxY, 2));
+		float dist = CalculateDistance(player.position, portal);
+		float tmp = (float)(dist / maxDist);
+		float val = tmp*13;
+	
+	
+		setColor(0x0F);
+		putStrXY(ViewportW + 2, 8, "Portal: ");
+		
+			
+			setColor(0x08);
+			c = 176;
+			for (int i = 1; i <= 13; i++)
+			{
+
+				if (i > val)
+				{
+					setColor(kolor_portal);
+			
+					c = 178;
+				}
+
+				putCharXY(ViewportW + 9 + 13- i, 8, c);
+			}
+
+	*/
+
+
 		//==============DEBUG============
 		//snprintf(buf, sizeof buf, "Player: %d,%d", player.position.X,player.position.Y);
-		//putStrXY(ViewportW + 7 , 6, buf); //next level number
+		//putStrXY(ViewportW + 7 , 8, buf); //next level number
 
 		//snprintf(buf, sizeof buf, "Portal: %d,%d", portal.X, portal.Y);
-		//putStrXY(ViewportW + 7 , 7, buf); //next level number
+		//putStrXY(ViewportW + 7 , 9, buf); //next level number
 
 
 
 
 	
 		
+}
+
+void InitGui()
+{
+	setColor(0x0f);
+	putStrXY(ViewportW + 2, 1, "HP: ");
+	setColor(0x0F);
+	putStrXY(ViewportW + 2, 3, "LVL: ");
+	setColor(0x0F);
+	putStrXY(ViewportW + 2, 6, "DMG: ");
+	setColor(0x0F);
+	putStrXY(ViewportW + 2, 8, "Portal: ");
 }
 
 void Log(char* text, int num)
@@ -245,3 +287,4 @@ void ShowDeathScreen()
 	//przezyles xxx itd.
 
 }
+

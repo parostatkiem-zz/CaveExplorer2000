@@ -78,6 +78,10 @@ void InitializeLevel(int level)
 
 	PlacePortal();
 
+	RefreshMap();
+	RefreshGui();
+
+	InitGui();
 
 }
 
@@ -550,9 +554,7 @@ void ShowMenu()
 				CurrentLevel = 0;
 				InitializeLevel(CurrentLevel);
 
-				RefreshMap();
-				RefreshGui();
-		
+			
 
 				Move();
 
@@ -696,3 +698,4 @@ void PlacePortal()
 	}
 
 }
+
