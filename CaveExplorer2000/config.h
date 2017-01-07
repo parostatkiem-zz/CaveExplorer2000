@@ -1,4 +1,4 @@
-Ôªø#pragma once
+#pragma once
 #include <windows.h>
 // Wymiary planszy
 #define  MapMaxX   200
@@ -6,7 +6,7 @@
 
 // Wymiary viewporta
 #define  ViewportW  80
-#define  ViewportH	30
+#define  ViewportH	30 
 
 //bloki
 #define blok_staly 0xB2
@@ -20,13 +20,13 @@
 
 
 
-#define CaveSize 49 //prawdopodobienstwo w % generacji sƒÖsiedniego segmentu jaskini (im wieksze, tym wiƒôksze sƒÖ jaskinie)
-#define MinCaveSize 10 //minimalna ilo≈õƒá segment√≥w jednej jaskini 
-#define CavesPerLevel 10 //ilosc jaski≈Ñ na ka≈ºdy poziom - dostosowaƒá do rozmiaru planszy!
-#define DTETR 2 //min. dystans do krawƒôdzi potrzebny do od≈õwie≈ºenia widoku - RACZEJ NIE ZMIENIAƒá
+#define CaveSize 49 //prawdopodobienstwo w % generacji s•siedniego segmentu jaskini (im wieksze, tym wi©ksze s• jaskinie)
+#define MinCaveSize 10 //minimalna iloòÜ segment¢w jednej jaskini 
+#define CavesPerLevel 10 //ilosc jaski‰ na kaædy poziom - dostosowaÜ do rozmiaru planszy!
+#define DTETR 2 //min. dystans do kraw©dzi potrzebny do odòwieæenia widoku - RACZEJ NIE ZMIENIAÜ
 
 #define EnemyAmount 22 //ilosc przeciwnikow na lvl 0
-#define EnemyMultiplier 1.5 //mno≈ºnik zwiƒôkszania si≈Çy oraz ilo≈õci przeciwnik√≥w na kolejnym lvl
+#define EnemyMultiplier 1.5 //mnoænik zwi©kszania siày oraz iloòci przeciwnik¢w na kolejnym lvl
 #define EnemyStartHp 20
 #define EnemyStartDamage 4
 #define MaxEnemyNum 100		//maksymalna przewidziana ilosc przeciwnikow (ustawiona na sztywno bo tak.)
@@ -34,13 +34,13 @@
 #define PlayerStartHp 50
 #define PlayerStartDamage 7
 #define ExpToNextLevel 10
-#define PlayerDamageMultiplier 1.3 //mno≈ºnik zwiƒôkszenia obra≈ºe≈Ñ gracza na ka≈ºdy level
-#define HPregenRate 7 //uzdrawia gracza o 1hp co X ruch√≥w -> im mniejsza wartosc, tym szybciej ro≈õnie HP
+#define PlayerDamageMultiplier 1.3 //mnoænik zwi©kszenia obraæe‰ gracza na kaædy level
+#define HPregenRate 7 //uzdrawia gracza o 1hp co X ruch¢w -> im mniejsza wartosc, tym szybciej roònie HP
 
 
-#define MinDamageMultiplier 0.6 //mno≈ºlik minimalnych obra≈ºen wzglƒôdem pe≈Çnych obra≈ºe≈Ñ
-#define SeeDistance 6 //zasiƒôg wzroku przeciwnik√≥w
-#define Visibility 10 //zasiƒôg wzroku gracza | obecnie nieu≈ºywany
+#define MinDamageMultiplier 0.6 //mnoælik minimalnych obraæen wzgl©dem peànych obraæe‰
+#define SeeDistance 6 //zasi©g wzroku przeciwnik¢w
+#define Visibility 10 //zasi©g wzroku gracza | obecnie nieuæywany
 
 //kolory
 #define kolor_gracz 0x03
@@ -61,6 +61,7 @@ extern unsigned int GameState;
 extern unsigned int LogLevel;
 extern unsigned int Turns;
 extern unsigned int CurrentLevel;
+extern unsigned int EnemiesKilled;
 
 extern COORD viewport;
 extern COORD portal;

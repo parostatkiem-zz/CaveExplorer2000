@@ -77,7 +77,7 @@ void RefreshMap()
 	putCharXY( player.position.X-viewport.X, player.position.Y - viewport.Y, blok_gracz);
 
 
-	//czy portal jest w zasiêgu mapy
+	//czy portal jest w zasi©gu mapy
 	tmp= GetOnScreenPos(portal);
 	if(tmp.X>=0 && tmp.X<=ViewportW &&tmp.Y >= 0 && tmp.Y <= ViewportH)
 	{ 
@@ -294,6 +294,16 @@ void ShowDeathScreen()
 
 
 	//przezyles xxx itd.
+
+	setColor(kolor_menu_aktywny);
+	snprintf(buf, sizeof buf, "Doszedˆe˜ do jaskini: %d",CurrentLevel+1);
+	putStrXY(62, 3, buf); 
+
+	snprintf(buf, sizeof buf, "Osi¥gn¥ˆe˜ poziom: %d", player.level);
+	putStrXY(62, 5, buf);
+
+	snprintf(buf, sizeof buf, "Zabiˆe˜ %d przeciwnik¢w", EnemiesKilled);
+	putStrXY(62, 7, buf);
 
 }
 
