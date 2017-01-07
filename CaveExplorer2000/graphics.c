@@ -101,7 +101,7 @@ void RefreshGui()
 
 		///==========HP=========
 	
-		setColor(0x04);
+		setColor(0x0c);
 		char c = 178;
 		for (int i = 1; i <= 15; i++)
 		{
@@ -115,7 +115,7 @@ void RefreshGui()
 			putCharXY(ViewportW + 6+i, 1, c);
 		}
 	
-		setColor(0x04);
+		setColor(0x0c);
 
 		snprintf(buf, sizeof buf, "%d", player.hp);
 		putStrXY(ViewportW + 6+15+2, 1, buf);  //current level number
@@ -149,9 +149,12 @@ void RefreshGui()
 
 
 		
-		setColor(kolor_menu_aktywny);
+		setColor(0xD0);
 		snprintf(buf, sizeof buf, "%d - %d", (int)(player.damage * MinDamageMultiplier), player.damage);
 		putStrXY(ViewportW + 7, 6, buf); //player min and max damage number
+
+		snprintf(buf, sizeof buf, "%d", CurrentLevel+1);
+		putStrXY(ViewportW + 21, 6, buf); //cave deep
 
 
 
@@ -203,14 +206,17 @@ void RefreshGui()
 
 void InitGui()
 {
-	setColor(0x0f);
-	putStrXY(ViewportW + 2, 1, "HP: ");
-	setColor(0x0F);
-	putStrXY(ViewportW + 2, 3, "LVL: ");
-	setColor(0x0F);
-	putStrXY(ViewportW + 2, 6, "DMG: ");
-	setColor(0x0F);
-	putStrXY(ViewportW + 2, 8, "Portal: ");
+	setColor(0x04);
+	putStrXY(ViewportW + 2, 1, "HP:");
+
+	setColor(0x02);
+	putStrXY(ViewportW + 2, 3, "LVL:");
+
+	setColor(0x05);
+	putStrXY(ViewportW + 2, 6, "DMG:"); putStrXY(ViewportW + 15, 6, "CAVE:");
+
+	setColor(0x09);
+	putStrXY(ViewportW + 2, 8, "Portal:");
 }
 
 void Log(char* text, int num)
