@@ -153,22 +153,25 @@ void RefreshGui()
 		snprintf(buf, sizeof buf, "%d - %d", (int)(player.damage * MinDamageMultiplier), player.damage);
 		putStrXY(ViewportW + 7, 6, buf); //player min and max damage number
 
-	/*	///==========Portal=========
+
+
+
+		///==========Portal=========
 		
 
-		float maxDist = sqrt(pow(MapMaxX,2)+ pow(MapMaxY, 2));
+		float maxDist = sqrt(pow(MapMaxX,2)+ pow(MapMaxY, 2))*0.75;
 		float dist = CalculateDistance(player.position, portal);
 		float tmp = (float)(dist / maxDist);
-		float val = tmp*13;
+		float val = tmp*12;
 	
 	
 		setColor(0x0F);
-		putStrXY(ViewportW + 2, 8, "Portal: ");
+		//putStrXY(ViewportW + 2, 8, "Portal: ");
 		
 			
 			setColor(0x08);
 			c = 176;
-			for (int i = 1; i <= 13; i++)
+			for (int i = 1; i <= 12; i++)
 			{
 
 				if (i > val)
@@ -178,10 +181,10 @@ void RefreshGui()
 					c = 178;
 				}
 
-				putCharXY(ViewportW + 9 + 13- i, 8, c);
+				putCharXY(ViewportW + 10 + 12- i, 8, c);
 			}
 
-	*/
+	
 
 
 		//==============DEBUG============
@@ -245,7 +248,7 @@ void ClearLog()
 {
 	LogLevel = 0;
 	int i = 0;
-	for (i = 8; i < ViewportH; i++)
+	for (i = 9; i < ViewportH; i++)
 	{
 		putStrXY(ViewportW + 1,i , "                                      ");
 	}
