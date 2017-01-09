@@ -214,35 +214,77 @@ void TryMove(char direction)
 	switch (direction)
 	{ 
 	case 72: //gora
-		if ( map[player.position.Y - 1][player.position.X ]==blok_pusty|| map[player.position.Y - 1][player.position.X] == blok_zwykly)
+		if ( map[player.position.Y - 1][player.position.X ]==blok_pusty|| map[player.position.Y - 1][player.position.X] == blok_zwykly || map[player.position.Y - 1][player.position.X] == blok_zwykly_ukruszony)
 		{
-			player.position.Y--;
-			putCharXY(player.position.X - viewport.X, player.position.Y - viewport.Y, blok_gracz);
-			putCharXY(player.position.X - viewport.X, player.position.Y - viewport.Y + 1, blok_pusty);
+			
+			if(map[player.position.Y - 1][player.position.X]==blok_zwykly)
+			{ 
+				//nale¿y ukruszyæ blok
+				setColor(kolor_blok_zwykly);
+				putCharXY(player.position.X - viewport.X, player.position.Y - viewport.Y-1 , blok_zwykly_ukruszony);
+				map[player.position.Y - 1][player.position.X] = blok_zwykly_ukruszony;
+			}
+			else
+			{
+				//blok ju¿ jest ukruszony, mo¿na go zniszczyæ i siê tam przemieœciæ LUB pole jest puste
+				player.position.Y--;
+				putCharXY(player.position.X - viewport.X, player.position.Y - viewport.Y, blok_gracz);
+				putCharXY(player.position.X - viewport.X, player.position.Y - viewport.Y + 1, blok_pusty);
+			}
 		}
 		break;
 	case 80:  //dol
-		if (map[player.position.Y + 1][player.position.X] == blok_pusty || map[player.position.Y + 1][player.position.X] == blok_zwykly)
+		if (map[player.position.Y + 1][player.position.X] == blok_pusty || map[player.position.Y + 1][player.position.X] == blok_zwykly || map[player.position.Y + 1][player.position.X] == blok_zwykly_ukruszony)
 		{
-			player.position.Y++;
-			putCharXY(player.position.X - viewport.X, player.position.Y - viewport.Y, blok_gracz);
-			putCharXY(player.position.X - viewport.X , player.position.Y - viewport.Y - 1, blok_pusty);
+			if (map[player.position.Y + 1][player.position.X] == blok_zwykly)
+			{
+				//nale¿y ukruszyæ blok
+				setColor(kolor_blok_zwykly);
+				putCharXY(player.position.X - viewport.X, player.position.Y - viewport.Y+ 1, blok_zwykly_ukruszony);
+				map[player.position.Y + 1][player.position.X] = blok_zwykly_ukruszony;
+			}
+			else
+			{
+				player.position.Y++;
+				putCharXY(player.position.X - viewport.X, player.position.Y - viewport.Y, blok_gracz);
+				putCharXY(player.position.X - viewport.X, player.position.Y - viewport.Y - 1, blok_pusty);
+			}
 		}
 		break;
 	case 77: //prawo
-		if (map[player.position.Y ][player.position.X+1 ] == blok_pusty || map[player.position.Y][player.position.X + 1] == blok_zwykly)
+		if (map[player.position.Y ][player.position.X+1 ] == blok_pusty || map[player.position.Y][player.position.X + 1] == blok_zwykly || map[player.position.Y ][player.position.X + 1] == blok_zwykly_ukruszony)
 		{
-			player.position.X++;
-			putCharXY(player.position.X - viewport.X, player.position.Y - viewport.Y, blok_gracz);
-			putCharXY(player.position.X - viewport.X - 1, player.position.Y - viewport.Y , blok_pusty);
+			if (map[player.position.Y ][player.position.X + 1] == blok_zwykly)
+			{
+				//nale¿y ukruszyæ blok
+				setColor(kolor_blok_zwykly);
+				putCharXY(player.position.X - viewport.X + 1, player.position.Y - viewport.Y, blok_zwykly_ukruszony);
+				map[player.position.Y ][player.position.X + 1] = blok_zwykly_ukruszony;
+			}
+			else
+			{
+				player.position.X++;
+				putCharXY(player.position.X - viewport.X, player.position.Y - viewport.Y, blok_gracz);
+				putCharXY(player.position.X - viewport.X - 1, player.position.Y - viewport.Y, blok_pusty);
+			}
 		}
 		break;
 	case 75: //lewo
-		if (map[player.position.Y][player.position.X - 1] == blok_pusty || map[player.position.Y][player.position.X - 1] == blok_zwykly)
+		if (map[player.position.Y][player.position.X - 1] == blok_pusty || map[player.position.Y][player.position.X - 1] == blok_zwykly || map[player.position.Y][player.position.X - 1] == blok_zwykly_ukruszony)
 		{
-			player.position.X--;
-			putCharXY(player.position.X - viewport.X, player.position.Y - viewport.Y, blok_gracz);
-			putCharXY(player.position.X - viewport.X + 1, player.position.Y - viewport.Y , blok_pusty);
+			if (map[player.position.Y][player.position.X - 1] == blok_zwykly)
+			{
+				//nale¿y ukruszyæ blok
+				setColor(kolor_blok_zwykly);
+				putCharXY(player.position.X - viewport.X - 1, player.position.Y - viewport.Y, blok_zwykly_ukruszony);
+				map[player.position.Y][player.position.X - 1] = blok_zwykly_ukruszony;
+			}
+			else
+			{
+				player.position.X--;
+				putCharXY(player.position.X - viewport.X, player.position.Y - viewport.Y, blok_gracz);
+				putCharXY(player.position.X - viewport.X + 1, player.position.Y - viewport.Y, blok_pusty);
+			}
 			
 		}
 		break;

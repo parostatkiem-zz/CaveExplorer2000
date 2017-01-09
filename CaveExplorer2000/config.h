@@ -10,7 +10,8 @@
 
 //bloki
 #define blok_staly 0xB2
-#define blok_zwykly 0xB0
+#define blok_zwykly 0xB1
+#define blok_zwykly_ukruszony 0xB0
 #define blok_pusty ' '
 #define blok_gracz 0xF5
 #define blok_przeciwnik 0xFE

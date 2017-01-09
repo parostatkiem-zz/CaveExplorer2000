@@ -56,6 +56,9 @@ void RefreshMap()
 				case (char)(blok_zwykly):
 					setColor(kolor_blok_zwykly);
 				break;
+				case (char)(blok_zwykly_ukruszony) :
+					setColor(kolor_blok_zwykly);
+					break;
 
 				case (char)blok_przeciwnik:
 					setColor(kolor_blok_przeciwnik);
