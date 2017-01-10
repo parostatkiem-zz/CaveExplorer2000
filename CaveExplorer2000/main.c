@@ -2,14 +2,17 @@
 #include "config.h"
 #include "console.h"
 #include "gameEngine.h"
-#include "init.h" 
+#include "gameSave.h" 
 
-unsigned char map[MapMaxX][MapMaxY];
+
+
+unsigned char map[200][200];
 unsigned int GameState = 0;
 unsigned int LogLevel = 0;
 unsigned int Turns = 0;
 unsigned int CurrentLevel = 0;
 unsigned int EnemiesKilled = 0;
+
 struct playerClass player;
 COORD viewport;
 COORD portal;
@@ -23,7 +26,7 @@ int main()
 	
 	initScreen();
 
-
+	
 	player.hp = PlayerStartHp - 3; // -3 dla test¢w
 	player.damage = PlayerStartDamage;
 	player.maxhp = PlayerStartHp;
@@ -31,6 +34,7 @@ int main()
 
 	player.level = 1;
 
+	
 	ShowMenu();
 
 

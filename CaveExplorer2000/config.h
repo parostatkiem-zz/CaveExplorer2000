@@ -1,8 +1,8 @@
 #pragma once
 #include <windows.h>
 // Wymiary planszy
-#define  MapMaxX   200
-#define  MapMaxY	200
+#define MapMaxX 200
+#define MapMaxY 200
 
 // Wymiary viewporta
 #define  ViewportW  80
@@ -57,7 +57,7 @@
 
 
 //globalna definicja zmiennych
-extern unsigned char map[MapMaxX][MapMaxY];
+extern unsigned char map[200][200];
 extern unsigned int GameState;
 extern unsigned int LogLevel;
 extern unsigned int Turns;

@@ -3,8 +3,6 @@
 #include <string.h>
 #include "console.h"
 #include "graphics.h"
-#include "init.h"
-#include "config.h"
 #include <time.h>
 #include <windows.h>
 #include <stdio.h>

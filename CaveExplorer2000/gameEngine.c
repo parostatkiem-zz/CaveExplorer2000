@@ -1,5 +1,5 @@
 #include "gameEngine.h"
-#include <windows.h>
+
 #include <stdio.h>
 #include <conio.h>
 #include <string.h>
@@ -27,7 +27,7 @@ void InitializeLevel(int level)
 		}
 	}
 
-	//generowanie jaskiä
+	//generowanie jaskiñ
 	int i = 0;
 	for (i = 0; i <= CavesPerLevel; i++)
 	{
@@ -40,13 +40,13 @@ void InitializeLevel(int level)
 	
 	}
 
-	//generowanie przeciwnik¢w===================
+	//generowanie przeciwników===================
 	struct Enemy e;
 	e.position.X = 0;
 	e.position.Y = 0;
 	for (i = 0; i < MaxEnemyNum; i++) //czyszczenie tablicy przeciwnikow
 	{
-		enemies[i] = e; //resetowanie pozycji kazdego przeciwnika na (0,0) - oznacza to, ¾e nie on istnieje
+		enemies[i] = e; //resetowanie pozycji kazdego przeciwnika na (0,0) - oznacza to, ¿e nie on istnieje
 	}
 
 
@@ -620,6 +620,7 @@ void ShowMenu()
 
 				break;
 			case 3: //wyjdz
+				saveGame();
 				exit(0);
 				break;
 			}

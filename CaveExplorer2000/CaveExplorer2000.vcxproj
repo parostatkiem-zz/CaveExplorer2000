@@ -23,11 +23,13 @@
     <ClInclude Include="config.h" />
     <ClInclude Include="console.h" />
     <ClInclude Include="gameEngine.h" />
+    <ClInclude Include="gameSave.h" />
     <ClInclude Include="graphics.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="console.c" />
     <ClCompile Include="gameEngine.c" />
+    <ClCompile Include="gameSave.c" />
     <ClCompile Include="graphics.c" />
     <ClCompile Include="main.c" />
   </ItemGroup>
