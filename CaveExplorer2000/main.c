@@ -26,8 +26,9 @@ int main()
 	
 	initScreen();
 
-	
-	player.hp = PlayerStartHp - 3; // -3 dla test¢w
+	
+
+	player.hp = PlayerStartHp - 3; // -3 dla testów
 	player.damage = PlayerStartDamage;
 	player.maxhp = PlayerStartHp;
 	player.exp =9; //start exp

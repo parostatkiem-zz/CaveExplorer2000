@@ -552,7 +552,7 @@ void ShowMenu()
 
 			
 		}
-		if (GameState != 1)
+		if (GameState != 1 && !isSaved() )
 		{
 			colors[1] = 0x08;
 		}
@@ -611,16 +611,33 @@ void ShowMenu()
 				{
 					
 					RefreshMap();
-					return;
+					
+				}
+				else
+				{
+					//wczytaj gre
+					
+					loadGame();
+					GameState = 1;
+					system("CLS");
+					RefreshMap();
+					RefreshGui();
+					Move();
+
+					
 				}
 
 
+
+				return;
 				break;
 			case 2: //opcje
 
 				break;
 			case 3: //wyjdz
-				saveGame();
+
+				if(map[0][0]==blok_staly)
+					saveGame(); //zapisanie gry na wyjœciu jeœli wczytana jest jakaœ mapa
 				exit(0);
 				break;
 			}
