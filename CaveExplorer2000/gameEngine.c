@@ -25,11 +25,11 @@ void InitializeLevel(int level)
 			if (x == 0 || x == MapMaxX - 1 || y == 0 || y == MapMaxY - 1)
 				map[y][x] = blok_staly; //otaczanie mapy nierozbijalnymi blokami
 			else
-				map[y][x] = blok_zwykly; // wypeˆnianie mapy blokami do rozwalenia
+				map[y][x] = blok_zwykly; // wypelnianie mapy blokami do rozwalenia
 		}
 	}
 
-	//generowanie jaskiä
+	//generowanie jaskin
 	int i = 0;
 	for (i = 0; i <= CavesPerLevel; i++)
 	{
@@ -42,13 +42,13 @@ void InitializeLevel(int level)
 
 	}
 
-	//generowanie przeciwnik¢w===================
+	//generowanie przeciwnikow===================
 	struct Enemy e;
 	e.position.X = 0;
 	e.position.Y = 0;
 	for (i = 0; i < MaxEnemyNum; i++) //czyszczenie tablicy przeciwnikow
 	{
-		enemies[i] = e; //resetowanie pozycji kazdego przeciwnika na (0,0) - oznacza to, ¾e nie on istnieje
+		enemies[i] = e; //resetowanie pozycji kazdego przeciwnika na (0,0) - oznacza to,ze on nie  istnieje
 	}
 
 
@@ -316,16 +316,16 @@ void MoveEnemies()
 	int i;
 	int xDist = 0;
 	int yDist = 0;
-	for (i = 0; i < MaxEnemyNum; i++) //p©tla po wszystkich przeciwnikach
+	for (i = 0; i < MaxEnemyNum; i++) //petla po wszystkich przeciwnikach
 	{
 		if (enemies[i].position.X == 0 && enemies[i].position.Y == 0)
-			continue; //koniec p©tli je˜li przeciwnik nie istnieje
+			continue; //koniec petli jesli przeciwnik nie istnieje
 
 		int tmp = CalculateDistance(enemies[i].position, player.position);
-		if (CalculateDistance(enemies[i].position, player.position) <= SeeDistance) //je˜li przeciwnik widzi gracza
+		if (CalculateDistance(enemies[i].position, player.position) <= SeeDistance) //jesli przeciwnik widzi gracza
 		{
 			setColor(kolor_blok_przeciwnik);
-			if (CalculateDistance(enemies[i].position, player.position) <= 1) //przeciwnik stoi koˆo gracza
+			if (CalculateDistance(enemies[i].position, player.position) <= 1) //przeciwnik stoi kolo gracza
 			{
 				//przeciwnik atakuje
 				int obrazenia = RandomInt(MinDamageMultiplier*enemies[i].damage, enemies[i].damage);
@@ -342,13 +342,13 @@ void MoveEnemies()
 			{
 				xDist = enemies[i].position.X - player.position.X;
 				yDist = enemies[i].position.Y - player.position.Y;
-				if (abs(xDist) > abs(yDist)) //przeciwnik porusza siÂ© w osi poziomej
+				if (abs(xDist) > abs(yDist)) //przeciwnik porusza si© w osi poziomej
 				{
 					if (xDist > 0) //w lewo
 					{
 						if (map[enemies[i].position.Y][enemies[i].position.X - 1] == blok_pusty || map[enemies[i].position.Y][enemies[i].position.X - 1] == blok_gracz)
 						{
-							//mo¾e si© normalnie poruszyc w wyznaczonym kierunku
+							//moze sie normalnie poruszyc w wyznaczonym kierunku
 							enemies[i].position.X--;
 							putCharXY(GetOnScreenPos(enemies[i].position).X, GetOnScreenPos(enemies[i].position).Y, blok_przeciwnik);
 							putCharXY(GetOnScreenPos(enemies[i].position).X + 1, GetOnScreenPos(enemies[i].position).Y, blok_pusty);
@@ -360,7 +360,7 @@ void MoveEnemies()
 							{
 								if (map[enemies[i].position.Y - 1][enemies[i].position.X] == blok_pusty || map[enemies[i].position.Y - 1][enemies[i].position.X] == blok_gracz)
 								{
-									//nie moˆ si© normalnie poruszyc, wiÂ©c rusza wedˆug innej osi
+									//nie moze sie normalnie poruszyc, wiec rusza wedlug innej osi
 									enemies[i].position.Y--;
 									putCharXY(GetOnScreenPos(enemies[i].position).X, GetOnScreenPos(enemies[i].position).Y, blok_przeciwnik);
 									putCharXY(GetOnScreenPos(enemies[i].position).X, GetOnScreenPos(enemies[i].position).Y + 1, blok_pusty);
@@ -371,7 +371,7 @@ void MoveEnemies()
 							{
 								if (map[enemies[i].position.Y + 1][enemies[i].position.X] == blok_pusty || map[enemies[i].position.Y + 1][enemies[i].position.X] == blok_pusty)
 								{
-									//nie moˆ si© normalnie poruszyc, wiÂ©c rusza wedˆug innej osi
+									//nie moze sie normalnie poruszyc, wiec rusza wedlug innej osi
 									enemies[i].position.Y++;
 									putCharXY(GetOnScreenPos(enemies[i].position).X, GetOnScreenPos(enemies[i].position).Y, blok_przeciwnik);
 									putCharXY(GetOnScreenPos(enemies[i].position).X, GetOnScreenPos(enemies[i].position).Y - 1, blok_pusty);
@@ -384,7 +384,7 @@ void MoveEnemies()
 					{
 						if (map[enemies[i].position.Y][enemies[i].position.X + 1] == blok_pusty || map[enemies[i].position.Y][enemies[i].position.X + 1] == blok_gracz)
 						{
-							//mo¾e si© normalnie poruszyc w wyznaczonym kierunku
+							//moze sie normalnie poruszyc w wyznaczonym kierunku
 							enemies[i].position.X++;
 							putCharXY(GetOnScreenPos(enemies[i].position).X, GetOnScreenPos(enemies[i].position).Y, blok_przeciwnik);
 							putCharXY(GetOnScreenPos(enemies[i].position).X - 1, GetOnScreenPos(enemies[i].position).Y, blok_pusty);
@@ -396,7 +396,7 @@ void MoveEnemies()
 							{
 								if (map[enemies[i].position.Y - 1][enemies[i].position.X] == blok_pusty || map[enemies[i].position.Y - 1][enemies[i].position.X] == blok_gracz)
 								{
-									//nie moˆ si© normalnie poruszyc, wiÂ©c rusza wedˆug innej osi
+									//nie moze sie normalnie poruszyc, wiec rusza wedlug innej osi
 									enemies[i].position.Y--;
 									putCharXY(GetOnScreenPos(enemies[i].position).X, GetOnScreenPos(enemies[i].position).Y, blok_przeciwnik);
 									putCharXY(GetOnScreenPos(enemies[i].position).X, GetOnScreenPos(enemies[i].position).Y + 1, blok_pusty);
@@ -407,7 +407,7 @@ void MoveEnemies()
 							{
 								if (map[enemies[i].position.Y + 1][enemies[i].position.X] == blok_pusty || map[enemies[i].position.Y + 1][enemies[i].position.X] == blok_pusty)
 								{
-									//nie moˆ si© normalnie poruszyc, wiÂ©c rusza wedˆug innej osi
+									//nie moze sie normalnie poruszyc, wiec rusza wedlug innej osi
 									enemies[i].position.Y++;
 									putCharXY(GetOnScreenPos(enemies[i].position).X, GetOnScreenPos(enemies[i].position).Y, blok_przeciwnik);
 									putCharXY(GetOnScreenPos(enemies[i].position).X, GetOnScreenPos(enemies[i].position).Y - 1, blok_pusty);
@@ -417,13 +417,13 @@ void MoveEnemies()
 						}
 					}
 				}
-				else //przeciwnik porusza si© w osi pionowej
+				else //przeciwnik porusza sie w osi pionowej
 				{
 					if (yDist > 0) //w gore
 					{
 						if (map[enemies[i].position.Y - 1][enemies[i].position.X] == blok_pusty || map[enemies[i].position.Y - 1][enemies[i].position.X] == blok_gracz)
 						{
-							//mo¾e si© normalnie poruszyc w wyznaczonym kierunku
+							//moze sie normalnie poruszyc w wyznaczonym kierunku
 							enemies[i].position.Y--;
 							putCharXY(GetOnScreenPos(enemies[i].position).X, GetOnScreenPos(enemies[i].position).Y, blok_przeciwnik);
 							putCharXY(GetOnScreenPos(enemies[i].position).X, GetOnScreenPos(enemies[i].position).Y + 1, blok_pusty);
@@ -435,7 +435,7 @@ void MoveEnemies()
 							{
 								if (map[enemies[i].position.Y][enemies[i].position.X - 1] == blok_pusty || map[enemies[i].position.Y][enemies[i].position.X - 1] == blok_gracz)
 								{
-									//nie moˆ si© normalnie poruszyc, wiÂ©c rusza wedˆug innej osi
+									//nie moze sie normalnie poruszyc, wiec rusza wedlug innej osi
 									enemies[i].position.X--;
 									putCharXY(GetOnScreenPos(enemies[i].position).X, GetOnScreenPos(enemies[i].position).Y, blok_przeciwnik);
 									putCharXY(GetOnScreenPos(enemies[i].position).X + 1, GetOnScreenPos(enemies[i].position).Y, blok_pusty);
@@ -447,7 +447,7 @@ void MoveEnemies()
 							{
 								if (map[enemies[i].position.Y][enemies[i].position.X + 1] == blok_pusty || map[enemies[i].position.Y][enemies[i].position.X + 1] == blok_gracz)
 								{
-									//nie moˆ si© normalnie poruszyc, wiÂ©c rusza wedˆug innej osi
+									//nie moze sie normalnie poruszyc, wiec rusza wedlug innej osi
 									enemies[i].position.X++;
 									putCharXY(GetOnScreenPos(enemies[i].position).X, GetOnScreenPos(enemies[i].position).Y, blok_przeciwnik);
 									putCharXY(GetOnScreenPos(enemies[i].position).X - 1, GetOnScreenPos(enemies[i].position).Y, blok_pusty);
@@ -461,7 +461,7 @@ void MoveEnemies()
 					{
 						if (map[enemies[i].position.Y + 1][enemies[i].position.X] == blok_pusty || map[enemies[i].position.Y + 1][enemies[i].position.X] == blok_pusty)
 						{
-							//mo¾e si© normalnie poruszyc w wyznaczonym kierunku
+							//moze sie normalnie poruszyc w wyznaczonym kierunku
 							enemies[i].position.Y++;
 							putCharXY(GetOnScreenPos(enemies[i].position).X, GetOnScreenPos(enemies[i].position).Y, blok_przeciwnik);
 							putCharXY(GetOnScreenPos(enemies[i].position).X, GetOnScreenPos(enemies[i].position).Y - 1, blok_pusty);
@@ -473,7 +473,7 @@ void MoveEnemies()
 							{
 								if (map[enemies[i].position.Y][enemies[i].position.X - 1] == blok_pusty || map[enemies[i].position.Y][enemies[i].position.X - 1] == blok_gracz)
 								{
-									//nie moˆ si© normalnie poruszyc, wiÂ©c rusza wedˆug innej osi
+									//nie moze sie normalnie poruszyc, wiec rusza wedlug innej osi
 									enemies[i].position.X--;
 									putCharXY(GetOnScreenPos(enemies[i].position).X, GetOnScreenPos(enemies[i].position).Y, blok_przeciwnik);
 									putCharXY(GetOnScreenPos(enemies[i].position).X + 1, GetOnScreenPos(enemies[i].position).Y, blok_pusty);
@@ -485,7 +485,7 @@ void MoveEnemies()
 							{
 								if (map[enemies[i].position.Y][enemies[i].position.X + 1] == blok_pusty || map[enemies[i].position.Y][enemies[i].position.X + 1] == blok_gracz)
 								{
-									//nie moˆ si© normalnie poruszyc, wiÂ©c rusza wedˆug innej osi
+									//nie moze sie normalnie poruszyc, wiec rusza wedlug innej osi
 									enemies[i].position.X++;
 									putCharXY(GetOnScreenPos(enemies[i].position).X, GetOnScreenPos(enemies[i].position).Y, blok_przeciwnik);
 									putCharXY(GetOnScreenPos(enemies[i].position).X - 1, GetOnScreenPos(enemies[i].position).Y, blok_pusty);
@@ -616,7 +616,7 @@ void ShowMenu()
 				GameState = 1;
 				CurrentLevel = 0;
 				Turns = 0;
-				player.hp = PlayerStartHp -45; // -3 dla test¢w
+				player.hp = PlayerStartHp -45; // -3 dla testow
 				player.damage = PlayerStartDamage;
 				player.maxhp = PlayerStartHp;
 				player.exp = 0; //start exp
@@ -683,20 +683,19 @@ void ShowMenu()
 
 void Atack()
 {
-	int i = 0;
-	for (i = 0; i < MaxEnemyNum; i++) //p©tla po wszystkich przeciwnikach
+	int i = 0;  //petla po wszystkich przeciwnikach
 	{
 		if (enemies[i].position.X == 0 && enemies[i].position.Y == 0)
-			continue; //pominiecie przeciwnija je˜li nie istnieje
+			continue;    //pominiecie przeciwnika jesli nie istnieje
 
 		int tmp = CalculateDistance(enemies[i].position, player.position);
 		int s = CalculateDistance(enemies[i].position, player.position);
-		if (CalculateDistance(enemies[i].position, player.position) <= 2) //je˜li gracz jest obok przeciwnika
+		if (CalculateDistance(enemies[i].position, player.position) <= 2) //jestli gracz jest obok przeciwnika
 		{
 			int obrazenia = RandomInt(MinDamageMultiplier*player.damage, player.damage);
 
 
-			Log("Zadaˆe˜ obra¾enia", obrazenia);
+			Log("Zadane obra¾enia", obrazenia);
 			if (enemies[i].hp <= obrazenia)//cios zabija przeciwnika
 			{
 				EnemiesKilled++;
@@ -788,7 +787,7 @@ void PlacePortal()
 
 }
 
-void CheckPortal() //sprawdza, czy gracz wˆa˜nie wszedˆ w portal
+void CheckPortal() //sprawdza, czy gracz nie  wszedl w portal
 {
 	if (player.position.X == portal.X && player.position.Y == portal.Y)
 	{

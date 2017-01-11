@@ -193,12 +193,6 @@ void RefreshGui()
 	
 
 
-		//==============DEBUG============
-		//snprintf(buf, sizeof buf, "Player: %d,%d", player.position.X,player.position.Y);
-		//putStrXY(ViewportW + 7 , 8, buf); //next level number
-
-		//snprintf(buf, sizeof buf, "Portal: %d,%d", portal.X, portal.Y);
-		//putStrXY(ViewportW + 7 , 9, buf); //next level number
 
 
 
@@ -299,16 +293,16 @@ void ShowDeathScreen()
 	//przezyles xxx itd.
 
 	setColor(kolor_menu_aktywny);
-	snprintf(buf, sizeof buf, "Doszed?ˆe˜? do jaskini: %d",CurrentLevel+1);
+	snprintf(buf, sizeof buf, "Doszedˆe˜ do jaskini: %d",CurrentLevel+1);
 	putStrXY(62, 3, buf); 
 	 
-	snprintf(buf, sizeof buf, "Osi¥gnˆ?e˜? poziom: %d", player.level);
+	snprintf(buf, sizeof buf, "Osi¥gn¥ˆe˜ poziom: %d", player.level);
 	putStrXY(62, 5, buf);
 
-	snprintf(buf, sizeof buf, "Zabi?e?ˆe˜ %d przeciwnik¢w", EnemiesKilled);
+	snprintf(buf, sizeof buf, "Zabiˆe˜ %d przeciwnik¢w", EnemiesKilled); 
 	putStrXY(62, 7, buf);
 
-	snprintf(buf, sizeof buf, "Poruszyˆe˜ si©? %d razy", Turns);
+	snprintf(buf, sizeof buf, "Poruszyˆe˜ si© %d razy", Turns);
 	putStrXY(62, 9, buf);
 
 }
