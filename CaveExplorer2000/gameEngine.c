@@ -652,25 +652,26 @@ void ShowMenu()
 					system("CLS");
 					RefreshMap();
 					RefreshGui();
-
+					return;
 				}
 				else
 				{
 					//wczytaj gre
-
-					loadGame();
-					GameState = 1;
-					system("CLS");
-					RefreshMap();
-					RefreshGui();
-					Move();
-
+					if(isSaved())
+					{ 
+						loadGame();
+						GameState = 1;
+						system("CLS");
+						RefreshMap();
+						RefreshGui();
+						Move();
+					}
 
 				}
 
 
 
-				return;
+			
 				break;
 			case 2: //opcje
 				tmp = GameState;

@@ -304,30 +304,20 @@ int loadGame()
 	return 1;
 }
 
-int isSaved()
-{
-
-	snprintf(nazwa, sizeof nazwa, "%s\\%s", getenv("UserProfile"), "Documents\\CaveExplorer2000");
-	
-	snprintf(nazwa, sizeof nazwa, "%s\\%s", nazwa, "savegame.txt");
-
-	plik = fopen(nazwa, "r");
-	if (plik == NULL)
-		return 0;
-	else
-		return 1;
-
-}
-
 int loadGameSaveVariable()
 {
-	if (isSaved)
-	{
+	
 		snprintf(nazwa, sizeof nazwa, "%s\\%s", getenv("UserProfile"), "Documents\\CaveExplorer2000");
 
 		snprintf(nazwa, sizeof nazwa, "%s\\%s", nazwa, "savegame.txt");
 
 		plik = fopen(nazwa, "r");
+		if (plik == NULL)
+		{
+			GameSaveLoad = 0;
+			return 0;
+		}
+			
 		const size_t line_size = 41000;
 		const size_t zmienna_size = 50;
 		unsigned char* line = malloc(line_size);
@@ -337,18 +327,27 @@ int loadGameSaveVariable()
 		int i = 0;
 
 		fgets(line, line_size, plik);
-		
-			if (line[13] == '1')
-				GameSaveLoad = 1;
-			else
-				GameSaveLoad = 0;
-			
-	
+
+		if (line[13] == '1')
+			GameSaveLoad = 1;
+		else
+			GameSaveLoad = 0;
 
 
+
+
+		return 1;
+
 	
 		
-	}
-	else
-		GameSaveLoad = 0;
 }
+int isSaved()
+{
+	
+	if (loadGameSaveVariable()==0)
+		return 0;
+	else
+		return 1;
+
+}
+
