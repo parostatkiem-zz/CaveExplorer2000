@@ -66,7 +66,7 @@ extern unsigned int EnemiesKilled;
 
 extern unsigned int GameSaveLoad;
 
-extern COORD viewport;
+extern COORD viewport; 
 extern COORD portal;
 extern struct playerClass
 {

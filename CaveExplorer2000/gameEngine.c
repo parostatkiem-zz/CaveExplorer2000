@@ -628,7 +628,7 @@ void ShowMenu()
 
 				system("CLS");
 
-				GameState = 1;
+				GameState = 1; 
 				CurrentLevel = 0;
 				Turns = 0;
 				player.hp = PlayerStartHp; // 3 dla testow

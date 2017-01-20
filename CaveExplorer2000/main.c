@@ -15,7 +15,7 @@ unsigned int EnemiesKilled = 0;
 
 unsigned int GameSaveLoad = 1;
 
-struct playerClass player;
+struct playerClass player; 
 COORD viewport;
 COORD portal;
 

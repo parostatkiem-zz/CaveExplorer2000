@@ -110,7 +110,7 @@ void RefreshGui()
 		for (int i = 1; i <= 15; i++)
 		{
 		
-			if (i > hpPercent)
+			if (i > hpPercent) 
 			{
 				setColor(0x08);
 				c = 176;

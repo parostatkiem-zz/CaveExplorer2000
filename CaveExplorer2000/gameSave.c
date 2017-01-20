@@ -6,7 +6,7 @@
 
 
 FILE *plik;
-
+ 
 char nazwa[150];
 unsigned int x = 0, y = 0;
 
