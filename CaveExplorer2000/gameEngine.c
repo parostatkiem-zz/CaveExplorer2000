@@ -631,7 +631,7 @@ void ShowMenu()
 				GameState = 1;
 				CurrentLevel = 0;
 				Turns = 0;
-				player.hp = PlayerStartHp -45; // -3 dla testow
+				player.hp = PlayerStartHp; // 3 dla testow
 				player.damage = PlayerStartDamage;
 				player.maxhp = PlayerStartHp;
 				player.exp = 0; //start exp
@@ -709,7 +709,7 @@ void Atack()
 
 		int tmp = CalculateDistance(enemies[i].position, player.position);
 		int s = CalculateDistance(enemies[i].position, player.position);
-		if (CalculateDistance(enemies[i].position, player.position) <= 2) //jestli gracz jest obok przeciwnika
+		if (CalculateDistance(enemies[i].position, player.position) <= 1) //jestli gracz jest obok przeciwnika
 		{
 			TotalTurns++;
 			Turns++;

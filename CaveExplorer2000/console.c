@@ -13,7 +13,7 @@ void initScreen( void )
    cciInfo.bVisible = 0;   
    SetConsoleCursorInfo( GetStdHandle(STD_OUTPUT_HANDLE), &cciInfo );   
 
-   system( "chcp 852" );
+  // system( "chcp 852" );
    system( "cls" );
 }
 

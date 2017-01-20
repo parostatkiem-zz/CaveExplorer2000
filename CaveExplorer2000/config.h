@@ -23,7 +23,7 @@
 
 #define CaveSize 49 //prawdopodobienstwo w % generacji s¥siedniego segmentu jaskini (im wieksze, tym wi©ksze s¥ jaskinie)
 #define MinCaveSize 10 //minimalna ilo˜† segment¢w jednej jaskini 
-#define CavesPerLevel 10 //ilosc jaskiä na ka¾dy poziom - dostosowa† do rozmiaru planszy!
+#define CavesPerLevel 14 //ilosc jaskiä na ka¾dy poziom - dostosowa† do rozmiaru planszy!
 #define DTETR 2 //min. dystans do kraw©dzi potrzebny do od˜wie¾enia widoku - RACZEJ NIE ZMIENIA†
 
 #define EnemyAmount 22 //ilosc przeciwnikow na lvl 0
@@ -36,7 +36,7 @@
 #define PlayerStartDamage 7
 #define ExpToNextLevel 10
 #define PlayerDamageMultiplier 1.3 //mno¾nik zwi©kszenia obra¾eä gracza na ka¾dy level
-#define HPregenRate 7 //uzdrawia gracza o 1hp co X ruch¢w -> im mniejsza wartosc, tym szybciej ro˜nie HP
+#define HPregenRate 8 //uzdrawia gracza o 1hp co X ruch¢w -> im mniejsza wartosc, tym szybciej ro˜nie HP
 
 
 #define MinDamageMultiplier 0.6 //mno¾lik minimalnych obra¾en wzgl©dem peˆnych obra¾eä

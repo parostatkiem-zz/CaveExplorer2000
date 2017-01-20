@@ -121,7 +121,7 @@ void RefreshGui()
 	
 		setColor(0x0c);
 
-		snprintf(buf, sizeof buf, "%d", player.hp);
+		snprintf(buf, sizeof buf, "%d ", player.hp);
 		putStrXY(ViewportW + 6+15+2, 1, buf);  //current level number
 		
 		///==========LVL=========
