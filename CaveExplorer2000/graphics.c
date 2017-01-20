@@ -1,5 +1,6 @@
 #include "graphics.h"
 #include "gameEngine.h"
+#include "config.h"
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -160,8 +161,6 @@ void RefreshGui()
 		putStrXY(ViewportW + 21, 6, buf); //cave deep
 
 
-
-
 		///==========Portal=========
 		
 
@@ -302,7 +301,7 @@ void ShowDeathScreen()
 	snprintf(buf, sizeof buf, "Zabiˆe˜ %d przeciwnik¢w", EnemiesKilled); 
 	putStrXY(62, 7, buf);
 
-	snprintf(buf, sizeof buf, "Poruszyˆe˜ si© %d razy", Turns);
+	snprintf(buf, sizeof buf, "Poruszyˆe˜ si© %d razy", TotalTurns);
 	putStrXY(62, 9, buf);
 
 }

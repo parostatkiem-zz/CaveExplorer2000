@@ -6,7 +6,7 @@
 #include <math.h>
 
 
-
+unsigned int Turns = 0;
 int CaveSegments = 0;
 
 void InitializeLevel(int level)
@@ -171,21 +171,26 @@ void PlacePlayer()
 
 void Move()
 {
+	
 	unsigned char znak;
 	do
 	{
 		znak = getKey();
-		if (znak == 0 || znak == 0xE0) znak = getKey();
+		if (znak == 0 || znak == 0xE0) 
+			znak = getKey();  //'czyszczenie' znaku ze œmieci jeœli jest enterem albo czymœ takim
 
 		if (znak == 72 || znak == 80 || znak == 77 || znak == 75)
 		{
-			ClearLog();
-			RegenerateLife();
-			TryMove(znak);
-			CheckPortal();
-			MoveEnemies();
-			CheckRefresh();
-			RefreshGui();
+			if (GameState == 1)
+			{
+				ClearLog();
+				RegenerateLife();
+				TryMove(znak);
+				CheckPortal();
+				MoveEnemies();
+				CheckRefresh();
+				RefreshGui();
+			}
 
 		}
 		if (znak == 27) //escape pressed
@@ -195,10 +200,12 @@ void Move()
 
 		if (znak == 32) //space pressed
 		{
-			ClearLog();
-			RegenerateLife();
-			Atack();
-
+			if (GameState == 1)
+			{
+				ClearLog();
+				RegenerateLife();
+				Atack();
+			}
 		}
 
 
@@ -218,6 +225,7 @@ void TryMove(char direction)
 	case 72: //gora
 		if (map[player.position.Y - 1][player.position.X] == blok_pusty || map[player.position.Y - 1][player.position.X] == blok_zwykly || map[player.position.Y - 1][player.position.X] == blok_zwykly_ukruszony)
 		{
+			TotalTurns++;
 			Turns++;
 			if (map[player.position.Y - 1][player.position.X] == blok_zwykly)
 			{
@@ -238,6 +246,7 @@ void TryMove(char direction)
 	case 80:  //dol
 		if (map[player.position.Y + 1][player.position.X] == blok_pusty || map[player.position.Y + 1][player.position.X] == blok_zwykly || map[player.position.Y + 1][player.position.X] == blok_zwykly_ukruszony)
 		{
+			TotalTurns++;
 			Turns++;
 			if (map[player.position.Y + 1][player.position.X] == blok_zwykly)
 			{
@@ -257,6 +266,7 @@ void TryMove(char direction)
 	case 77: //prawo
 		if (map[player.position.Y][player.position.X + 1] == blok_pusty || map[player.position.Y][player.position.X + 1] == blok_zwykly || map[player.position.Y][player.position.X + 1] == blok_zwykly_ukruszony)
 		{
+			TotalTurns++;
 			Turns++;
 			if (map[player.position.Y][player.position.X + 1] == blok_zwykly)
 			{
@@ -276,10 +286,11 @@ void TryMove(char direction)
 	case 75: //lewo
 		if (map[player.position.Y][player.position.X - 1] == blok_pusty || map[player.position.Y][player.position.X - 1] == blok_zwykly || map[player.position.Y][player.position.X - 1] == blok_zwykly_ukruszony)
 		{
+			TotalTurns++;
 			Turns++;
 			if (map[player.position.Y][player.position.X - 1] == blok_zwykly)
 			{
-				//nalez ukruszyc blok
+				//nalezy ukruszyc blok
 				setColor(kolor_blok_zwykly);
 				putCharXY(player.position.X - viewport.X - 1, player.position.Y - viewport.Y, blok_zwykly_ukruszony);
 				map[player.position.Y][player.position.X - 1] = blok_zwykly_ukruszony;
@@ -294,6 +305,7 @@ void TryMove(char direction)
 		}
 		break;
 	}
+	
 	map[player.position.Y][player.position.X] = blok_pusty;
 
 	setColor(0x0F);
@@ -683,7 +695,8 @@ void ShowMenu()
 
 void Atack()
 {
-	int i = 0;  //petla po wszystkich przeciwnikach
+	int i = 0;
+	for(int i = 0; i<MaxEnemyNum ;i++)  //petla po wszystkich przeciwnikach
 	{
 		if (enemies[i].position.X == 0 && enemies[i].position.Y == 0)
 			continue;    //pominiecie przeciwnika jesli nie istnieje
@@ -692,6 +705,8 @@ void Atack()
 		int s = CalculateDistance(enemies[i].position, player.position);
 		if (CalculateDistance(enemies[i].position, player.position) <= 2) //jestli gracz jest obok przeciwnika
 		{
+			TotalTurns++;
+			Turns++;
 			int obrazenia = RandomInt(MinDamageMultiplier*player.damage, player.damage);
 
 

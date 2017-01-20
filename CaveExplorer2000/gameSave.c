@@ -30,7 +30,7 @@ int saveGame()
 	
 
 	fprintf(plik, "map=%s\n", map);
-	fprintf(plik, "turns=%d\n", Turns);
+	fprintf(plik, "totalTurns=%d\n", TotalTurns);
 	fprintf(plik, "currentLevel=%d\n", CurrentLevel);
 	fprintf(plik, "enemiesKilled=%d\n", EnemiesKilled);
 	fprintf(plik, "player=%d,%d,%d,%d,%d,%d,%d,\n", player.position.X, player.position.Y,player.damage,player.exp,player.hp,player.level,player.maxhp);
@@ -116,9 +116,9 @@ int loadGame()
 			
 		}
 
-		if (strcmp(zmienna, "turns") == 0)
+		if (strcmp(zmienna, "totalTurns") == 0)
 		{
-			Turns = atoi(line);
+			TotalTurns = atoi(line);
 
 		}
 

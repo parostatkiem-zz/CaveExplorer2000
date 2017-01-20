@@ -60,7 +60,7 @@
 extern unsigned char map[200][200];
 extern unsigned int GameState;
 extern unsigned int LogLevel;
-extern unsigned int Turns;
+extern unsigned int TotalTurns;
 extern unsigned int CurrentLevel;
 extern unsigned int EnemiesKilled;
 

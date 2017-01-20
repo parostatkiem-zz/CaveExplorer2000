@@ -9,7 +9,7 @@
 unsigned char map[200][200];
 unsigned int GameState = 0;
 unsigned int LogLevel = 0;
-unsigned int Turns = 0;
+unsigned int TotalTurns = 0;
 unsigned int CurrentLevel = 0;
 unsigned int EnemiesKilled = 0;
 
