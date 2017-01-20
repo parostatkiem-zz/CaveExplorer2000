@@ -5,7 +5,7 @@
 #include <string.h>
 #include <math.h>
 
-
+unsigned int tmp = 0;
 unsigned int Turns = 0;
 int CaveSegments = 0;
 
@@ -525,6 +525,7 @@ int CalculateDistance(COORD a, COORD b)
 
 void ShowMenu()
 {
+	
 	system("CLS");
 	unsigned char menuIndex = 0;
 	short colors[5] = { 0 };
@@ -553,6 +554,8 @@ void ShowMenu()
 
 	do
 	{
+		if (GameState != 0 && GameState != 1)
+			return;
 		for (i = 0; i < 5; i++)
 		{
 			if (menuIndex == i)
@@ -566,7 +569,7 @@ void ShowMenu()
 
 
 		}
-		if (GameState != 1 && !isSaved())
+		if (GameState != 1 && !GameSaveLoad)
 		{
 			colors[1] = 0x08;
 		}
@@ -574,7 +577,7 @@ void ShowMenu()
 
 
 		drawMenuItem(17, 7, colors[0], "Rozpocznij NOW¤ gr©");
-		if (isSaved() && GameState == 0)
+		if (isSaved()&&GameSaveLoad  &&  GameState == 0)
 		{
 
 
@@ -670,11 +673,14 @@ void ShowMenu()
 				return;
 				break;
 			case 2: //opcje
+				tmp = GameState;
+				GameState=2;
+				ShowOptions(tmp);
 
 				break;
 			case 3: //wyjdz
 
-				if (map[0][0] == blok_staly)
+				if (map[0][0] == blok_staly && GameSaveLoad)
 					saveGame(); //zapisanie gry na wyjsciu jesli wczytana jest jakas mapa
 				exit(0);
 				break;

@@ -64,6 +64,8 @@ extern unsigned int TotalTurns;
 extern unsigned int CurrentLevel;
 extern unsigned int EnemiesKilled;
 
+extern unsigned int GameSaveLoad;
+
 extern COORD viewport;
 extern COORD portal;
 extern struct playerClass

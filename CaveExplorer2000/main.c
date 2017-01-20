@@ -13,6 +13,8 @@ unsigned int TotalTurns = 0;
 unsigned int CurrentLevel = 0;
 unsigned int EnemiesKilled = 0;
 
+unsigned int GameSaveLoad = 1;
+
 struct playerClass player;
 COORD viewport;
 COORD portal;
@@ -27,7 +29,7 @@ int main()
 	initScreen();
 
 	
-
+	loadGameSaveVariable();
 
 
 	

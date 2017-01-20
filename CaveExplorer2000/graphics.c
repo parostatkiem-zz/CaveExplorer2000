@@ -81,7 +81,7 @@ void RefreshMap()
 	putCharXY( player.position.X-viewport.X, player.position.Y - viewport.Y, blok_gracz);
 
 
-	//czy portal jest w zasi?gu mapy
+	//czy portal jest w zasiegu mapy
 	tmp= GetOnScreenPos(portal);
 	if(tmp.X>=0 && tmp.X<=ViewportW &&tmp.Y >= 0 && tmp.Y <= ViewportH)
 	{ 
@@ -301,8 +301,67 @@ void ShowDeathScreen()
 	snprintf(buf, sizeof buf, "Zabiˆe˜ %d przeciwnik¢w", EnemiesKilled); 
 	putStrXY(62, 7, buf);
 
-	snprintf(buf, sizeof buf, "Poruszyˆe˜ si© %d razy", TotalTurns);
+	snprintf(buf, sizeof buf, "Poruszˆe˜ si© %d razy", TotalTurns);
 	putStrXY(62, 9, buf);
 
 }
 
+void ShowOptions(int initialGameState)
+{
+	system("cls");
+	unsigned char menuIndex = 0;
+	unsigned char c;
+
+	
+	if (GameSaveLoad)
+		menuIndex = 1;
+	else
+		menuIndex = 0;
+
+
+		do
+		{ 
+				
+
+				drawMenuItem(16, 12,kolor_menu, "Obsˆuga zapisu i wczytywania gry");
+				if(menuIndex==1)
+					drawMenuItem(16 + 37, 12 ,  0x0A, "TAK"); //lewo
+				else
+					drawMenuItem(16 + 37, 12, 0x0A, "NIE"); //prawo
+
+
+
+				c = getKey();
+
+
+				if (c == 75) //lewo
+				{
+					if (menuIndex < (2 - 1))
+					{
+						GameSaveLoad = 1;
+						menuIndex++;
+					}
+					
+				}
+
+				if (c == 77)//prawo
+				{
+					if (menuIndex >0)
+					{
+						GameSaveLoad = 0;
+						menuIndex--;
+
+					}
+				}
+
+				if (c == 27) //escape pressed
+				{
+					GameState = initialGameState;
+					system("CLS");
+
+					return;
+				}
+
+
+		} while (1);
+	}

@@ -26,9 +26,14 @@ int saveGame()
 
 	//=========FAKTYCZNY ZAPIS DO PLIKU==============
 
-
+	if (GameSaveLoad == 0)
+	{
+		fprintf(plik, "gameSaveLoad=%d\n", GameSaveLoad);
+		fclose(plik);
+		return 1;
+	}
 	
-
+	fprintf(plik, "gameSaveLoad=%d\n", GameSaveLoad);
 	fprintf(plik, "map=%s\n", map);
 	fprintf(plik, "totalTurns=%d\n", TotalTurns);
 	fprintf(plik, "currentLevel=%d\n", CurrentLevel);
@@ -45,6 +50,7 @@ int saveGame()
 	fprintf(plik, "\n");
 	fprintf(plik, "portal=%d,%d,\n", portal.X,portal.Y);
 	fclose(plik);
+	return 1;
 }
 
 int loadGame()
@@ -95,6 +101,18 @@ int loadGame()
 			i++;
 		} while (line[i] != '\n');
 		line[i] = '\0';//usuniecie znaku nowej linii z konca zmiennej
+
+
+
+		if (strcmp(zmienna, "gameSaveLoad") == 0)
+		{
+			GameSaveLoad = line;
+			if (!GameSaveLoad)
+				return; //wczytywanie jest wylaczone
+		}
+
+
+
 
 		 if(strcmp(zmienna,"map")==0)
 		{
@@ -299,4 +317,38 @@ int isSaved()
 	else
 		return 1;
 
+}
+
+int loadGameSaveVariable()
+{
+	if (isSaved)
+	{
+		snprintf(nazwa, sizeof nazwa, "%s\\%s", getenv("UserProfile"), "Documents\\CaveExplorer2000");
+
+		snprintf(nazwa, sizeof nazwa, "%s\\%s", nazwa, "savegame.txt");
+
+		plik = fopen(nazwa, "r");
+		const size_t line_size = 41000;
+		const size_t zmienna_size = 50;
+		unsigned char* line = malloc(line_size);
+
+
+		unsigned char tmp[50] = { 0 };
+		int i = 0;
+
+		fgets(line, line_size, plik);
+		
+			if (line[13] == '1')
+				GameSaveLoad = 1;
+			else
+				GameSaveLoad = 0;
+			
+	
+
+
+	
+		
+	}
+	else
+		GameSaveLoad = 0;
 }
