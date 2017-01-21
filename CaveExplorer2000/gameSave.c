@@ -20,18 +20,27 @@ int saveGame()
 	 mkdir(nazwa, 0755);
 	 snprintf(nazwa, sizeof nazwa, "%s\\%s", nazwa, "savegame.txt");
 	
+
+	 if (!GameSaveLoad) //trzeba sapisac do pliku informacje, ze obsluga zapisu/odczytu jest wylaczona
+	 {
+		 plik = fopen(nazwa, "r+");
+		 if (plik == NULL)
+			 return 0;
+		// fprintf(plik, "gaasdas=%d\n", GameSaveLoad);
+		 fwrite("gameSaveLoad=0\n", 15, 1, plik);
+		 fclose(plik);
+		 return 1;
+	 }
+
+
+
+
 	plik = fopen(nazwa, "w+");
 	if (plik == NULL)
 		return 0;
 
 	//=========FAKTYCZNY ZAPIS DO PLIKU==============
 
-	if (GameSaveLoad == 0)
-	{
-		fprintf(plik, "gameSaveLoad=%d\n", GameSaveLoad);
-		fclose(plik);
-		return 1;
-	}
 	
 	fprintf(plik, "gameSaveLoad=%d\n", GameSaveLoad);
 	fprintf(plik, "map=%s\n", map);
@@ -304,7 +313,7 @@ int loadGame()
 	return 1;
 }
 
-int loadGameSaveVariable()
+int loadGameSaveVariable(unsigned int checkForGameSaveVariable)
 {
 	
 		snprintf(nazwa, sizeof nazwa, "%s\\%s", getenv("UserProfile"), "Documents\\CaveExplorer2000");
@@ -314,7 +323,7 @@ int loadGameSaveVariable()
 		plik = fopen(nazwa, "r");
 		if (plik == NULL)
 		{
-			GameSaveLoad = 0;
+			
 			return 0;
 		}
 			
@@ -328,11 +337,14 @@ int loadGameSaveVariable()
 
 		fgets(line, line_size, plik);
 
-		if (line[13] == '1')
-			GameSaveLoad = 1;
-		else
-			GameSaveLoad = 0;
 
+		if(checkForGameSaveVariable)
+			{ 
+			if (line[13] == '1')
+				GameSaveLoad = 1;
+			else
+				GameSaveLoad = 0;
+		}
 
 
 
@@ -344,7 +356,7 @@ int loadGameSaveVariable()
 int isSaved()
 {
 	
-	if (loadGameSaveVariable()==0)
+	if (loadGameSaveVariable(0)==0)
 		return 0;
 	else
 		return 1;

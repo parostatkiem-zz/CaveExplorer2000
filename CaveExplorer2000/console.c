@@ -4,14 +4,58 @@
 #include <stdio.h>
 #include <conio.h>
 
+
+int SetFontSize(HANDLE windowHandle, COORD size)
+{
+	CONSOLE_FONT_INFOEX font = { sizeof(CONSOLE_FONT_INFOEX) };
+
+	if (!GetCurrentConsoleFontEx(windowHandle, 0, &font))
+	{
+		return 0;
+	}
+
+	font.dwFontSize = size;
+
+	if (!SetCurrentConsoleFontEx(windowHandle, 0, &font))
+	{
+		return 0;
+	}
+
+	return 1;
+}
+
+
+
 void initScreen( void )
 {
    // Wymaga: windows.h
    // wylaczenie mrugania kursora - dziala od windowsa XP
+
+	
+	COORD size;
+
+	HANDLE wHnd;    // Handle to write to the console.
+	HANDLE rHnd;
    CONSOLE_CURSOR_INFO cciInfo;
+
+   size.X = 16;
+   size.Y = 16;
+
+   wHnd = GetStdHandle(STD_OUTPUT_HANDLE);
+   rHnd = GetStdHandle(STD_INPUT_HANDLE);
+
+
+   system("Title CaveExplorer2000 by Jan Sudczak");
+
+  SMALL_RECT windowSize = { 0, 0, 119, 29 };
+   SetConsoleWindowInfo(wHnd, 1, &windowSize);
+
    cciInfo.dwSize = 1;
    cciInfo.bVisible = 0;   
    SetConsoleCursorInfo( GetStdHandle(STD_OUTPUT_HANDLE), &cciInfo );   
+   COORD bufferSize = { 50, 4 };
+   SetConsoleScreenBufferSize(wHnd, bufferSize);
+   SetFontSize(wHnd, size);
 
    system( "chcp 852" );
    system( "cls" );

@@ -12,6 +12,10 @@ char buf[256];
 
 void RefreshMap()
 {
+	//system("CLS");
+	//InitGui();
+	//RefreshGui();
+	ClearLog();
 
 	if (GameState != 1)
 		return;

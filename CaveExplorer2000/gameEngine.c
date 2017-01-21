@@ -11,6 +11,7 @@ int CaveSegments = 0;
 
 void InitializeLevel(int level)
 {
+	system("CLS");
 	srand(time(NULL));
 	int x = 0;
 	int y = 0;
@@ -310,8 +311,6 @@ void TryMove(char direction)
 
 	setColor(0x0F);
 
-	//dfvbdfRefreshMap();
-	//	putCharXY(30, 30, direction);
 	return 1;
 }
 
@@ -569,7 +568,7 @@ void ShowMenu()
 
 
 		}
-		if (GameState != 1 && !GameSaveLoad)
+		if (GameState != 1 && !GameSaveLoad || !isSaved())
 		{
 			colors[1] = 0x08;
 		}
@@ -677,11 +676,11 @@ void ShowMenu()
 				tmp = GameState;
 				GameState=2;
 				ShowOptions(tmp);
-
+				tmp = GameSaveLoad;
 				break;
 			case 3: //wyjdz
 
-				if (map[0][0] == blok_staly && GameSaveLoad)
+				if (map[0][0] == blok_staly && GameSaveLoad || !GameSaveLoad)
 					saveGame(); //zapisanie gry na wyjsciu jesli wczytana jest jakas mapa
 				exit(0);
 				break;

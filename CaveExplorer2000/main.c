@@ -29,7 +29,7 @@ int main()
 	initScreen();
 
 	
-	loadGameSaveVariable();
+	loadGameSaveVariable(1);
 
 
 	
