@@ -25,37 +25,56 @@ int SetFontSize(HANDLE windowHandle, COORD size)
 }
 
 
-
 void initScreen( void )
 {
+
+	HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
+	COORD size;
+
+	
+		/* Grow by 50% */
+		size.X=16;
+		size.Y=16;
+		SetFontSize(h, size);
+
    // Wymaga: windows.h
    // wylaczenie mrugania kursora - dziala od windowsa XP
 
-	
-	COORD size;
+	HWND wh = GetConsoleWindow();
 
-	HANDLE wHnd;    // Handle to write to the console.
-	HANDLE rHnd;
-   CONSOLE_CURSOR_INFO cciInfo;
-
-   size.X = 16;
-   size.Y = 16;
-
-   wHnd = GetStdHandle(STD_OUTPUT_HANDLE);
-   rHnd = GetStdHandle(STD_INPUT_HANDLE);
+	// Move window to required position
+	MoveWindow(wh, 100, 100, 950, 535, TRUE);
 
 
-   system("Title CaveExplorer2000 by Jan Sudczak");
+	//
+	//COORD size;
 
-  SMALL_RECT windowSize = { 0, 0, 119, 29 };
-   SetConsoleWindowInfo(wHnd, 1, &windowSize);
+	//HANDLE wHnd;    // Handle to write to the console.
+	//HANDLE rHnd;
 
-   cciInfo.dwSize = 1;
-   cciInfo.bVisible = 0;   
-   SetConsoleCursorInfo( GetStdHandle(STD_OUTPUT_HANDLE), &cciInfo );   
-   COORD bufferSize = { 50, 4 };
-   SetConsoleScreenBufferSize(wHnd, bufferSize);
-   SetFontSize(wHnd, size);
+
+ //  size.X = 16;
+ //  size.Y = 16;
+
+ //  wHnd = GetStdHandle(STD_OUTPUT_HANDLE);
+ //  rHnd = GetStdHandle(STD_INPUT_HANDLE);
+
+
+ // 
+
+	//SMALL_RECT windowSize = { 0, 0, 120, 30 };
+ //  SetConsoleWindowInfo(wHnd, 1, &windowSize);
+
+ // 
+ //  COORD bufferSize = { 120, 30 };
+ //  SetConsoleScreenBufferSize(wHnd, bufferSize);
+ //  SetFontSize(wHnd, size);
+
+	system("Title CaveExplorer2000 by Jan Sudczak");
+		CONSOLE_CURSOR_INFO cciInfo;
+		cciInfo.dwSize = 1;
+	   cciInfo.bVisible = 0;
+	  SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &cciInfo);
 
    system( "chcp 852" );
    system( "cls" );
