@@ -5,79 +5,39 @@
 #include <conio.h>
 
 
-int SetFontSize(HANDLE windowHandle, COORD size)
-{
-	CONSOLE_FONT_INFOEX font = { sizeof(CONSOLE_FONT_INFOEX) };
-
-	if (!GetCurrentConsoleFontEx(windowHandle, 0, &font))
-	{
-		return 0;
-	}
-
-	font.dwFontSize = size;
-
-	if (!SetCurrentConsoleFontEx(windowHandle, 0, &font))
-	{
-		return 0;
-	}
-
-	return 1;
-}
-
-
 void initScreen( void )
 {
 
-	HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
-	COORD size;
-
-	
-		/* Grow by 50% */
-		size.X=16;
-		size.Y=16;
-		SetFontSize(h, size);
-
-   // Wymaga: windows.h
-   // wylaczenie mrugania kursora - dziala od windowsa XP
 
 	HWND wh = GetConsoleWindow();
 
-	// Move window to required position
-	MoveWindow(wh, 100, 100, 950, 535, TRUE);
 
+	MoveWindow(wh, 100, 100, 920, 400, TRUE); //zmiana rozmiaru okna na odpowiedni
 
-	//
-	//COORD size;
+	//ustawianie rozmiaru bufora okna
+	COORD bufferSize = { 110, 30 };
+	SetConsoleScreenBufferSize(wh, bufferSize);
 
-	//HANDLE wHnd;    // Handle to write to the console.
-	//HANDLE rHnd;
+	system("Title CaveExplorer2000 by Jan Sudczak"); //ustawianie tytu³u okna
 
+	//wy³¹czenie migania kursora
+	CONSOLE_CURSOR_INFO cciInfo;
+	cciInfo.dwSize = 1;
+	cciInfo.bVisible = 0;
+	SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &cciInfo);
 
- //  size.X = 16;
- //  size.Y = 16;
+		//Ustawianie czcionki na Terminal 8x12
+	  CONSOLE_FONT_INFOEX info = { 0 };
+	  info.cbSize = sizeof(info);
+	  info.dwFontSize.X = 8;
+	  info.dwFontSize.Y = 12;
+	  info.FontWeight = FW_NORMAL;
+	  wcscpy(info.FaceName, L"Terminal");
+	  SetCurrentConsoleFontEx(GetStdHandle(STD_OUTPUT_HANDLE), NULL, &info);
+	
 
- //  wHnd = GetStdHandle(STD_OUTPUT_HANDLE);
- //  rHnd = GetStdHandle(STD_INPUT_HANDLE);
-
-
- // 
-
-	//SMALL_RECT windowSize = { 0, 0, 120, 30 };
- //  SetConsoleWindowInfo(wHnd, 1, &windowSize);
-
- // 
- //  COORD bufferSize = { 120, 30 };
- //  SetConsoleScreenBufferSize(wHnd, bufferSize);
- //  SetFontSize(wHnd, size);
-
-	system("Title CaveExplorer2000 by Jan Sudczak");
-		CONSOLE_CURSOR_INFO cciInfo;
-		cciInfo.dwSize = 1;
-	   cciInfo.bVisible = 0;
-	  SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &cciInfo);
-
-   system( "chcp 852" );
-   system( "cls" );
+	   system( "chcp 852" ); //na koniec kodowanie. Jest to raczej niepotrzebne, ale dam ¿eby by³o na wszelki wypadek :D
+	   system( "cls" );
 }
 
 void putCharXY( int x, int y, unsigned char z )

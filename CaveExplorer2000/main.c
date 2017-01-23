@@ -28,6 +28,7 @@ int main()
 	
 	initScreen();
 
+
 	
 	loadGameSaveVariable(1);
 

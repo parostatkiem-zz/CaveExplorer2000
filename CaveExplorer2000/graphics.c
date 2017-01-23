@@ -296,8 +296,13 @@ void ShowDeathScreen()
 	//przezyles xxx itd.
 
 	setColor(kolor_menu_aktywny);
-	snprintf(buf, sizeof buf, "Doszedˆe˜ do jaskini: %d",CurrentLevel+1);
-	putStrXY(62, 3, buf); 
+	snprintf(buf, sizeof buf, "Doszedˆe˜ do jaskini: ",CurrentLevel+1);
+	putStrXY(62, 3, buf);
+	setColor(0xD0);
+	snprintf(buf, sizeof buf, "%d", CurrentLevel + 1);
+	putStrXY(62+23, 3, buf); 
+
+	setColor(kolor_menu_aktywny);
 	 
 	snprintf(buf, sizeof buf, "Osi¥gn¥ˆe˜ poziom: %d", player.level);
 	putStrXY(62, 5, buf);
