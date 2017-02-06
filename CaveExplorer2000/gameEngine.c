@@ -1,9 +1,6 @@
-#include "gameEngine.h"
+#include "config.h"
 
-#include <stdio.h>
-#include <conio.h>
-#include <string.h>
-#include <math.h>
+
 
 unsigned int tmp = 0;
 unsigned int Turns = 0;
@@ -84,9 +81,10 @@ void InitializeLevel(int level)
 	PlacePortal();
 
 	RefreshMap();
+	InitGui();
 	RefreshGui();
 
-	InitGui();
+
 
 }
 
@@ -110,7 +108,9 @@ void CheckRefresh()
 {
 	if (player.position.X - viewport.X <= DTETR || player.position.X - viewport.X >= ViewportW - DTETR || player.position.Y - viewport.Y <= DTETR || player.position.Y - viewport.Y >= ViewportH - DTETR)
 	{
+
 		RefreshMap();
+	
 	}
 }
 
@@ -530,26 +530,7 @@ void ShowMenu()
 	short colors[5] = { 0 };
 	int i = 0;
 	unsigned char c;
-	setColor(kolor_logo);
-
-
-	putStrXY(1, 0, "_________                    ___________             .__              ");
-	putStrXY(1, 1, "\\_   ___ \\_____ ___  __ ____ \\_   _____/__  ________ |  |   ___________  ___________ ");
-	putStrXY(1, 2, "/    \\  \\/\\__  \\\\  \\/ // __ \\ |    __)_\\  \\/  |____ \\|  |  /  _ \\_  __ \\/ __ \\_  __ \\");
-	putStrXY(1, 3, "\\     \\____/ __ \\\\   /\\  ___/ |        \\>    <|  |_> >  |_(  <_> )  | \\|  ___/|  | \\/");
-	putStrXY(1, 4, " \\______  (____  /\\_/  \\___  >_______  /__/\\_ \\   __/|____/\\____/|__|   \\___  >__|   ");
-	putStrXY(1, 5, "        \\/     \\/          \\/        \\/      \\/__|                          \\/       ");
-
-	putStrXY(49, 7, "_______________  _______  _______   ");
-	putStrXY(49, 8, "\\_____  \\   _  \\ \\   _  \\ \\   _  \\ ");
-	putStrXY(49, 9, " /  ____/  /_\\  \\/  /_\\  \\/  /_\\  \\ ");
-	putStrXY(49, 10, "/       \\  \\_/   \\  \\_/   \\  \\_/   \\");
-	putStrXY(49, 11, "\\_______ \\_____  /\\_____  /\\_____  /");
-	putStrXY(49, 12, "        \\/     \\/       \\/       \\/ ");
-
-	setColor(0x08);
-	putStrXY(60, 20, "by  Jan Sudczak");
-	setColor(0x0F);
+	DrawLogo();
 
 	do
 	{
@@ -648,6 +629,7 @@ void ShowMenu()
 
 				if (GameState == 1)
 				{
+					//gra sie toczy, zamknij menu
 					system("CLS");
 					RefreshMap();
 					RefreshGui();
@@ -672,17 +654,19 @@ void ShowMenu()
 
 			
 				break;
+
 			case 2: //opcje
-				tmp = GameState;
+				tmp = GameState; //zapis obecnego GameState do tymczasowej zmiennej
 				GameState=2;
 				ShowOptions(tmp);
-				tmp = GameSaveLoad;
+				DrawLogo();  //ponowne wyœwietlenie grafiki logo
 				break;
+
 			case 3: //wyjdz
 
 				if (map[0][0] == blok_staly && GameSaveLoad || !GameSaveLoad)
-					saveGame(); //zapisanie gry na wyjsciu jesli wczytana jest jakas mapa
-				exit(0);
+					saveGame(); //zapisanie gry na wyjsciu jesli wczytana jest jakas mapa lub zmieniono opcje
+				exit(0);  //ostateczne wyjscie z programu
 				break;
 			}
 		}

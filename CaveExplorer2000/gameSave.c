@@ -1,12 +1,6 @@
-#include "gameSave.h"
 #include "config.h"
-#include <stdio.h>
-#include <conio.h>
-#include <string.h>
-
 
 FILE *plik;
- 
 char nazwa[150];
 unsigned int x = 0, y = 0;
 
@@ -353,6 +347,7 @@ int loadGameSaveVariable(unsigned int checkForGameSaveVariable)
 	
 		
 }
+
 int isSaved()
 {
 	

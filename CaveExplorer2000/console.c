@@ -1,22 +1,61 @@
-#include "console.h"
+#include "config.h"
 
-#include <windows.h> 
-#include <stdio.h>
-#include <conio.h>
+void SetConsoleWindowSize(int x, int y)
+{
+	HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
 
+
+		
+
+	// If either dimension is greater than the largest console window we can have,
+	// there is no point in attempting the change.
+	
+		
+	
+
+
+	CONSOLE_SCREEN_BUFFER_INFO bufferInfo;
+	GetConsoleScreenBufferInfo(h, &bufferInfo);
+		
+
+	SMALL_RECT winInfo = bufferInfo.srWindow;
+	COORD windowSize = { winInfo.Right - winInfo.Left + 1, winInfo.Bottom - winInfo.Top + 1 };
+
+	if (windowSize.X > x || windowSize.Y > y)
+	{
+		// window size needs to be adjusted before the buffer size can be reduced.
+		SMALL_RECT info =
+		{
+			0,
+			0,
+			x < windowSize.X ? x - 1 : windowSize.X - 1,
+			y < windowSize.Y ? y - 1 : windowSize.Y - 1
+		};
+
+		SetConsoleWindowInfo(h, TRUE, &info);
+			
+	}
+
+	COORD size = { x, y };
+	SetConsoleScreenBufferSize(h, size);
+		
+
+
+	SMALL_RECT info = { 0, 0, x - 1, y - 1 };
+	SetConsoleWindowInfo(h, TRUE, &info);
+		
+}
 
 void initScreen( void )
 {
 
 
-	HWND wh = GetConsoleWindow();
+	
+	HANDLE wh2 = GetStdHandle(STD_OUTPUT_HANDLE);
 
 
-	MoveWindow(wh, 100, 100, 920, 400, TRUE); //zmiana rozmiaru okna na odpowiedni
 
-	//ustawianie rozmiaru bufora okna
-	COORD bufferSize = { 110, 30 };
-	SetConsoleScreenBufferSize(wh, bufferSize);
+	
 
 	system("Title CaveExplorer2000 by Jan Sudczak"); //ustawianie tytu³u okna
 
@@ -34,6 +73,18 @@ void initScreen( void )
 	  info.FontWeight = FW_NORMAL;
 	  wcscpy(info.FaceName, L"Terminal");
 	  SetCurrentConsoleFontEx(GetStdHandle(STD_OUTPUT_HANDLE), NULL, &info);
+	
+
+	  ////ustawianie rozmiaru bufora okna
+	  COORD bufferSize = { 120, 31 };
+	  SetConsoleScreenBufferSize(wh2, bufferSize);
+
+	  //SMALL_RECT windowSize = { 0, 0, 120, 29 };
+	  //SetConsoleWindowInfo(wh2, 1, &windowSize);
+
+	  //ShowWindow(GetConsoleWindow(), SW_NORMAL);
+
+	  SetConsoleWindowSize(120, 31); //ustawianie rozmiaru ekranu
 	
 
 	   system( "chcp 852" ); //na koniec kodowanie. Jest to raczej niepotrzebne, ale dam ¿eby by³o na wszelki wypadek :D
@@ -109,7 +160,7 @@ void drawMenuItem(int x, int y, unsigned short c, const char *s)
 
 	}
 
-	//putCharXY(x +num, y, 0xBA);
+
 
 	setColor(0x0F);
 

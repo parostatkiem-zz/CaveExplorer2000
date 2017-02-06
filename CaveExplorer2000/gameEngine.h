@@ -1,12 +1,6 @@
 #pragma once
 #include "config.h"
-#include <string.h>
-#include "console.h" 
-#include "graphics.h"
-#include <time.h>
-#include <windows.h>
-#include <stdio.h>
-#include <conio.h>
+
 
 
 int RandomInt(int min, int max);

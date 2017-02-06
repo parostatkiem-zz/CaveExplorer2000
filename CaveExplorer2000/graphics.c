@@ -1,11 +1,5 @@
-#include "graphics.h"
-#include "gameEngine.h"
 #include "config.h"
 
-#include <stdlib.h>
-#include <stdio.h>
-#include <conio.h>
-#include <math.h>
 
 int lastI = 0;
 char buf[256];
@@ -27,8 +21,10 @@ void RefreshMap()
 	viewport.X = player.position.X - ViewportW / 2;
 	viewport.Y = player.position.Y - ViewportH / 2;
 
-	
-	//system("CLS");
+	//InitGui();
+	/*system("CLS");
+	InitGui();
+	RefreshGui();*/
 
 	char c;
 	COORD tmp;
@@ -172,12 +168,7 @@ void RefreshGui()
 		float dist = CalculateDistance(player.position, portal);
 		float tmp = (float)(dist / maxDist);
 		float val = tmp*12;
-	
-	
-		setColor(0x0F);
-		//putStrXY(ViewportW + 2, 8, "Portal: ");
-		
-			
+
 			setColor(0x08);
 			c = 176;
 			for (int i = 1; i <= 12; i++)
@@ -374,3 +365,27 @@ void ShowOptions(int initialGameState)
 
 		} while (1);
 	}
+
+void DrawLogo()
+{
+	setColor(kolor_logo);
+
+
+	putStrXY(1, 0, "_________                    ___________             .__              ");
+	putStrXY(1, 1, "\\_   ___ \\_____ ___  __ ____ \\_   _____/__  ________ |  |   ___________  ___________ ");
+	putStrXY(1, 2, "/    \\  \\/\\__  \\\\  \\/ // __ \\ |    __)_\\  \\/  |____ \\|  |  /  _ \\_  __ \\/ __ \\_  __ \\");
+	putStrXY(1, 3, "\\     \\____/ __ \\\\   /\\  ___/ |        \\>    <|  |_> >  |_(  <_> )  | \\|  ___/|  | \\/");
+	putStrXY(1, 4, " \\______  (____  /\\_/  \\___  >_______  /__/\\_ \\   __/|____/\\____/|__|   \\___  >__|   ");
+	putStrXY(1, 5, "        \\/     \\/          \\/        \\/      \\/__|                          \\/       ");
+
+	putStrXY(49, 7, "_______________  _______  _______   ");
+	putStrXY(49, 8, "\\_____  \\   _  \\ \\   _  \\ \\   _  \\ ");
+	putStrXY(49, 9, " /  ____/  /_\\  \\/  /_\\  \\/  /_\\  \\ ");
+	putStrXY(49, 10, "/       \\  \\_/   \\  \\_/   \\  \\_/   \\");
+	putStrXY(49, 11, "\\_______ \\_____  /\\_____  /\\_____  /");
+	putStrXY(49, 12, "        \\/     \\/       \\/       \\/ ");
+
+	setColor(0x08);
+	putStrXY(60, 20, "by  Jan Sudczak");
+	setColor(0x0F);
+}

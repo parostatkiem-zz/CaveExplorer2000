@@ -1,5 +1,19 @@
 #pragma once
-#include <windows.h>
+#include <windows.h> //do typu COORD
+#include <stdio.h>
+#include <conio.h>
+#include <string.h>
+#include <math.h>
+
+
+#include "console.h"
+#include "gameEngine.h"
+#include "gameSave.h" 
+#include "graphics.h"
+
+
+
+
 // Wymiary planszy
 #define MapMaxX 200
 #define MapMaxY 200
@@ -20,35 +34,37 @@
 
 
 
+//tworzenie jaskiñ
+#define CaveSize 49 //prawdopodobienstwo w % generacji sasiedniego segmentu jaskini (im wieksze, tym wieksze sa jaskinie)
+#define MinCaveSize 10 //minimalna ilosc segmentow jednej jaskini 
+#define CavesPerLevel 14 //ilosc jaskin na kazdy poziom - dostosowac do rozmiaru planszy!
+#define DTETR 2 //min. dystans do krawedzi potrzebny do od˜wiezenia widoku - RACZEJ NIE ZMIENIAC
 
-#define CaveSize 49 //prawdopodobienstwo w % generacji s¥siedniego segmentu jaskini (im wieksze, tym wi©ksze s¥ jaskinie)
-#define MinCaveSize 10 //minimalna ilo˜† segment¢w jednej jaskini 
-#define CavesPerLevel 14 //ilosc jaskiä na ka¾dy poziom - dostosowa† do rozmiaru planszy!
-#define DTETR 2 //min. dystans do kraw©dzi potrzebny do od˜wie¾enia widoku - RACZEJ NIE ZMIENIA†
-
+//generacja przeciwników
 #define EnemyAmount 22 //ilosc przeciwnikow na lvl 0
-#define EnemyMultiplier 1.5 //mno¾nik zwi©kszania siˆy oraz ilo˜ci przeciwnik¢w na kolejnym lvl
+#define EnemyMultiplier 1.5 //mnoznik zwiekszania si³ˆy oraz ilo˜ci przeciwnikow na kolejnym lvl
 #define EnemyStartHp 20
 #define EnemyStartDamage 4
 #define MaxEnemyNum 100		//maksymalna przewidziana ilosc przeciwnikow (ustawiona na sztywno bo tak.)
 
+//gracz, levele gracza i jego parametry
 #define PlayerStartHp 50
 #define PlayerStartDamage 7
-#define ExpToNextLevel 10
-#define PlayerDamageMultiplier 1.3 //mno¾nik zwi©kszenia obra¾eä gracza na ka¾dy level
-#define HPregenRate 8 //uzdrawia gracza o 1hp co X ruch¢w -> im mniejsza wartosc, tym szybciej ro˜nie HP
+#define ExpToNextLevel 10 //iloœæ EXP potrzebna do zdobycia nast. poziomu postaci
+#define PlayerDamageMultiplier 1.3 //mnoznik zwiekszenia obrazen gracza na kazdy level
+#define HPregenRate 8 //uzdrawia gracza o 1hp co X ruchów -> im mniejsza wartosc, tym szybciej ro˜œnie HP
 
-
-#define MinDamageMultiplier 0.6 //mno¾lik minimalnych obra¾en wzgl©dem peˆnych obra¾eä
-#define SeeDistance 6 //zasi©g wzroku przeciwnik¢w
-#define Visibility 10 //zasi©g wzroku gracza | obecnie nieu¾ywany
+//globalne ustawienia
+#define MinDamageMultiplier 0.6 //mno¿lik minimalnych obra¿en wzglêdem pe³nych obra¿eñ
+#define SeeDistance 6 //zasiêg wzroku przeciwników
+#define Visibility 10 //zasiêg wzroku gracza | obecnie nieu¿ywany
 
 //kolory
 #define kolor_gracz 0x03
 #define kolor_blok_zwykly 0x08
 #define kolor_blok_staly 0x0F
 #define kolor_blok_przeciwnik 0x04
-#define kolor_tlo 0x00
+#define kolor_tlo 0x00 
 #define kolor_portal 0x09
 
 #define kolor_menu_aktywny 0x0D

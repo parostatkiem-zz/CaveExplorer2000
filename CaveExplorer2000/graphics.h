@@ -1,8 +1,5 @@
 #pragma once
 #include "config.h"
-#include "console.h"
- 
-
 
 void RefreshMap();
 
@@ -12,9 +9,10 @@ void InitGui();
 
 void Log(char* text, int num);
 
-
 void ClearLog();
 
 void ShowDeathScreen();
 
-void ShowOptions();
+void ShowOptions(int initialGameState);
+
+void DrawLogo();
